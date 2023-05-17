@@ -6,6 +6,14 @@ A collection of useful scripts for
 The online documentation at [TODO]() provides in depth information on how to
 create and execute scripts.
 
+## Questions or Issues
+
+Feel free to open an issue!
+
+## Contributing or ideas
+
+Pull requests or issues are encouraged!
+
 ## Quick Guide
 
 In order to execute scripts you must bundle and compile your TypeScript code
