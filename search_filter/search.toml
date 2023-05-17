@@ -1,0 +1,28 @@
+system = "windows"
+
+[output]
+name = "windows_search_lnk_files"
+directory = "./tmp"
+format = "json"
+compress = false
+endpoint_id = "abdc"
+collection_id = 1
+output = "local"
+filter_name = "indexed_lnk_files"
+# This script will take the search artifact below and filter it to only return entries that contain ".lnk" in the properties metadata
+filter_script = "Ly8gbWFpbi50cwpmdW5jdGlvbiBtYWluKCkgewogIGNvbnN0IGFyZ3MgPSBEZW5vLmFyZ3M7CiAgaWYgKGFyZ3MubGVuZ3RoIDwgMikgewogICAgcmV0dXJuIFtdOwogIH0KICBpZiAoYXJnc1sxXSAhPSAic2VhcmNoIikgewogICAgcmV0dXJuIEpTT04ucGFyc2UoYXJnc1swXSk7CiAgfQogIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGFyZ3NbMF0pOwogIGNvbnN0IGZpbHRlcl9lbnRyaWVzID0gW107CiAgZm9yIChjb25zdCBlbnRyeSBvZiBkYXRhKSB7CiAgICBpZiAoIUpTT04uc3RyaW5naWZ5KGVudHJ5LnByb3BlcnRpZXMpLmluY2x1ZGVzKCIubG5rIikpIHsKICAgICAgY29udGludWU7CiAgICB9CiAgICBmaWx0ZXJfZW50cmllcy5wdXNoKGVudHJ5KTsKICB9CiAgcmV0dXJuIGZpbHRlcl9lbnRyaWVzOwp9Cm1haW4oKTsK"
+
+[[artifacts]]
+artifact_name = "search" # Name of artifact
+[artifacts.search]
+# We will use the default system drive and path. But could provide alternative path if we wanted to
+# alt_path = "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb"
+
+# We collect processes too. This artifact will not get filtered because our script is checking the artifact_name first
+[[artifacts]]
+artifact_name = "processes" # Name of artifact
+[artifacts.processes]
+metadata = false # Get executable metadata
+md5 = false # MD5 all files
+sha1 = false # SHA1 all files
+sha256 = false # SHA256 all files

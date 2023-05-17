@@ -1,0 +1,14 @@
+import { getProcesses } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { WindowsProcessInfo } from "https://github.com/puffycid/artemis-api/src/windows/processes.ts";
+
+function main(): WindowsProcessInfo[] {
+  const md5 = true;
+  const sha1 = false;
+  const sha256 = false;
+  const pe_info = true;
+
+  const proc_list = getProcesses(md5, sha1, sha256, pe_info);
+  return proc_list;
+}
+
+main();
