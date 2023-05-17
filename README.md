@@ -13,7 +13,8 @@ into one (1) JavaScript file.\
 Then you will need to base64 encode your JavaScript code and copy that into your
 artemis collection.
 
-An example of a simple script that parses macOS plist files.
+An example of a simple script that parses macOS plist files using
+[artemis](https://github.com/puffycid/artemis).
 
 ```toml
 system = "macos"
@@ -36,7 +37,7 @@ script = "ZnVuY3Rpb24gZ2V0X3BsaXN0KHBhdGgpIHsKICAgIGNvbnN0IGRhdGEgPSBEZW5vLmNvcm
 ```
 
 An example of a simple filter script to filter out a macOS filelisting to only
-return Info.plist files
+return Info.plist files using [artemis](https://github.com/puffycid/artemis).
 
 ```toml
 system = "macos"
