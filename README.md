@@ -3,8 +3,8 @@
 A collection of useful scripts for
 [artemis](https://github.com/puffycid/artemis).
 
-The online documentation at [TODO]() provides in depth information on how to
-create and execute scripts.
+The online documentation at https://puffycid.github.io/artemis-book/ provides in
+depth information on how to create and execute scripts.
 
 ## Questions or Issues
 
