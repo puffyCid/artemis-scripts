@@ -1,4 +1,4 @@
-import { getUsnJrnl } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getUsnJrnl } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 /**
  * @returns Array of all Rust files in the `UsnJrnl`

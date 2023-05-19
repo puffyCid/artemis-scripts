@@ -1,5 +1,5 @@
-import { getSafariDownloads } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { RawSafariDownloads } from "https://github.com/puffycid/artemis-api/src/applications/safari.ts";
+import { getSafariDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { RawSafariDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/safari.ts";
 
 function main() {
   const bin_path = "/Users";

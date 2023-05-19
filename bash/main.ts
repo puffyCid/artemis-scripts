@@ -1,4 +1,4 @@
-import { getBashHistory } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getBashHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 function main() {
   const data = getBashHistory();

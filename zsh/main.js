@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/unix/shell_history.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/unix/shell_history.ts
 function get_zsh_history() {
   const data = Deno[Deno.internal].core.ops.get_zsh_history();
   const history = JSON.parse(data);
   return history;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getZshHistory() {
   return get_zsh_history();
 }

@@ -1,5 +1,5 @@
-import { getSafariHistory } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { RawSafariHistory } from "https://github.com/puffycid/artemis-api/src/applications/safari.ts";
+import { getSafariHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { RawSafariHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/safari.ts";
 
 function main() {
   const bin_path = "/Users";

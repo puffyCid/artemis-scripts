@@ -1,5 +1,5 @@
-import { getFsEvents } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Fsevents } from "https://github.com/puffycid/artemis-api/src/macos/fsevents.ts";
+import { getFsEvents } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Fsevents } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/fsevents.ts";
 
 /**
  * Parse FsEvents requries root permissions

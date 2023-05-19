@@ -1,5 +1,5 @@
-import { getChromiumDownloads } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { RawChromiumDownloads } from "https://github.com/puffycid/artemis-api/src/applications/chromium.ts";
+import { getChromiumDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { RawChromiumDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/chromium.ts";
 
 function main() {
   return recurse_dir("/Users");

@@ -1,5 +1,5 @@
-import { getAltUsersWin } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { UserInfo } from "https://github.com/puffycid/artemis-api/src/windows/users.ts";
+import { getAltUsersWin } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { UserInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/users.ts";
 
 function main(): UserInfo[] {
   const drive = Deno.env.get("SystemDrive");

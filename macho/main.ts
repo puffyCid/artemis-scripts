@@ -1,5 +1,5 @@
-import { getMacho } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { MachoInfo } from "https://github.com/puffycid/artemis-api/src/macos/macho.ts";
+import { getMacho } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { MachoInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/macho.ts";
 
 interface FileMeta {
   path: string;

@@ -1,4 +1,4 @@
-import { getRegistry } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getRegistry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 /**
  * MuiCache is a simple artifact that tracks applications executed from Explorer

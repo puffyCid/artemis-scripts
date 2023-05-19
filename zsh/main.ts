@@ -1,4 +1,4 @@
-import { getZshHistory } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getZshHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 function main() {
   const data = getZshHistory();

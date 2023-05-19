@@ -1,32 +1,32 @@
-// https://github.com/puffycid/artemis-api/src/windows/eventlogs.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts
 function get_eventlogs(path) {
   const data = Deno[Deno.internal].core.ops.get_eventlogs(path);
   const log_array = JSON.parse(data);
   return log_array;
 }
 
-// https://github.com/puffycid/artemis-api/src/windows/prefetch.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/prefetch.ts
 function get_prefetch_path(path) {
   const data = Deno[Deno.internal].core.ops.get_prefetch_path(path);
   const pf = JSON.parse(data);
   return pf;
 }
 
-// https://github.com/puffycid/artemis-api/src/windows/registry.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts
 function get_registry(path) {
   const data = Deno[Deno.internal].core.ops.get_registry(path);
   const reg_array = JSON.parse(data);
   return reg_array;
 }
 
-// https://github.com/puffycid/artemis-api/src/windows/shortcuts.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shortcuts.ts
 function get_lnk_file(path) {
   const data = Deno[Deno.internal].core.ops.get_lnk_file(path);
   const lnk = JSON.parse(data);
   return lnk;
 }
 
-// https://github.com/puffycid/artemis-api/src/windows/srum.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/srum.ts
 function get_srum_application_info(path) {
   const name = "{D10CA2FE-6FCF-4F6D-848E-B2E99266FA89}";
   const data = Deno[Deno.internal].core.ops.get_srum(path, name);
@@ -79,7 +79,7 @@ function get_srum_notifications(path) {
   return srum;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getLnkFile(path) {
   return get_lnk_file(path);
 }

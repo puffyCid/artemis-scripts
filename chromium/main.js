@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/applications/chromium.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/chromium.ts
 function get_chromium_history(path) {
   const data = Deno[Deno.internal].core.ops.get_chromium_history(path);
   const history = JSON.parse(data);
   return history;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getChromiumHistory(path) {
   return get_chromium_history(path);
 }

@@ -1,5 +1,5 @@
-import { getAmcache } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Amcache } from "https://github.com/puffycid/artemis-api/src/windows/amache.ts";
+import { getAmcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Amcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/amache.ts";
 
 function main(): Amcache[] {
   const cache = getAmcache();

@@ -1,4 +1,4 @@
-import { WindowsFileInfo } from "https://github.com/puffycid/artemis-api/src/windows/files.ts";
+import { WindowsFileInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/files.ts";
 
 /**
  * This script filters a filelisting to only show files created in the last 14 days

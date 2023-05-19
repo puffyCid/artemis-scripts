@@ -1,4 +1,4 @@
-import { getPlist } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getPlist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 interface PlistData {
   plist_content: Record<string, unknown>;

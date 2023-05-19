@@ -1,4 +1,4 @@
-import { getLoginItems } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getLoginItems } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 /**
  * Parse LoginItems

@@ -1,5 +1,5 @@
-import { getSrumApplicationInfo } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { ApplicationInfo } from "https://github.com/puffycid/artemis-api/src/windows/srum.ts";
+import { getSrumApplicationInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { ApplicationInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/srum.ts";
 
 function main(): ApplicationInfo[] {
   const path = "C:\\Windows\\System32\\sru\\SRUDB.dat";

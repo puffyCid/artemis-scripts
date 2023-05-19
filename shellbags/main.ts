@@ -1,4 +1,4 @@
-import { getShellbags } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getShellbags } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 /**
  * @returns Array of `Shellbags`

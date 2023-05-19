@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/applications/safari.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/safari.ts
 function get_safari_history(path) {
   const data = Deno[Deno.internal].core.ops.get_safari_history(path);
   const history = JSON.parse(data);
   return history;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getSafariHistory(path) {
   return get_safari_history(path);
 }

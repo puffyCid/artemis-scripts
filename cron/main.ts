@@ -1,4 +1,4 @@
-import { getCron } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getCron } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 /**
  * Parse Cron jobs

@@ -1,5 +1,5 @@
-import { getCustomShimdb } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Shimdb } from "https://github.com/puffycid/artemis-api/src/windows/shimdb.ts";
+import { getCustomShimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Shimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shimdb.ts";
 
 /**
  * Search for custom sdb files in all User directories.

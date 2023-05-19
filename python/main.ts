@@ -1,4 +1,4 @@
-import { getPythonHistory } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getPythonHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 function main() {
   const data = getPythonHistory();

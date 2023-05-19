@@ -1,5 +1,5 @@
-import { getBits } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Bits } from "https://github.com/puffycid/artemis-api/src/windows/bits.ts";
+import { getBits } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Bits } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/bits.ts";
 
 function main(): Bits {
   const carve = true;

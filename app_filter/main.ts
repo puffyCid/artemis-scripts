@@ -1,4 +1,4 @@
-import { MacosFileInfo } from "https://github.com/puffycid/artemis-api/src/macos/files.ts";
+import { MacosFileInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/files.ts";
 
 /**
  * Filters a provided file listing arguement to only return Info.plist files from /Applications

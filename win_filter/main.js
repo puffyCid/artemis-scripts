@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/windows/eventlogs.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts
 function get_eventlogs(path) {
   const data = Deno[Deno.internal].core.ops.get_eventlogs(path);
   const log_array = JSON.parse(data);
   return log_array;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getEventLogs(path) {
   return get_eventlogs(path);
 }

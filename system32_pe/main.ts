@@ -1,5 +1,5 @@
-import { getPe } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { PeInfo } from "https://github.com/puffycid/artemis-api/src/windows/pe.ts";
+import { getPe } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { PeInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/pe.ts";
 
 interface FileMeta {
   path: string;

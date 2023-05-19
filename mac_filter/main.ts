@@ -1,9 +1,9 @@
-import { getLoginItems, getMacho, getPlist } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { MacosFileInfo } from "https://github.com/puffycid/artemis-api/src/macos/files.ts";
-import { Fsevents } from "https://github.com/puffycid/artemis-api/src/macos/fsevents.ts";
-import { LoginItems } from "https://github.com/puffycid/artemis-api/src/macos/loginitems.ts";
-import { MachoInfo } from "https://github.com/puffycid/artemis-api/src/macos/macho.ts";
-import { UnifiedLog } from "https://github.com/puffycid/artemis-api/src/macos/unifiedlogs.ts";
+import { getLoginItems, getMacho, getPlist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { MacosFileInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/files.ts";
+import { Fsevents } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/fsevents.ts";
+import { LoginItems } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/loginitems.ts";
+import { MachoInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/macho.ts";
+import { UnifiedLog } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/unifiedlogs.ts";
 
 interface LogiItemsMacho {
   items: LoginItems;

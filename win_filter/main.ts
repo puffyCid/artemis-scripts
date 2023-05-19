@@ -1,10 +1,10 @@
-import { getEventLogs } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Bits } from "https://github.com/puffycid/artemis-api/src/windows/bits.ts";
-import { EventLogRecord } from "https://github.com/puffycid/artemis-api/src/windows/eventlogs.ts";
+import { getEventLogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Bits } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/bits.ts";
+import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
 import {
   Registry,
   RegistryData,
-} from "https://github.com/puffycid/artemis-api/src/windows/registry.ts";
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts";
 
 /**
  * Function to filter service event log records (EID 7045) looking for 16 character service names or sus service execution commands

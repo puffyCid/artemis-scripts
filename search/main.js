@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/windows/search.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/search.ts
 function get_search(path) {
   const data = Deno[Deno.internal].core.ops.get_search(path);
   const srum = JSON.parse(data);
   return srum;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getSearch(path) {
   return get_search(path);
 }

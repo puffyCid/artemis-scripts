@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/unix/cron.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/unix/cron.ts
 function get_cron() {
   const data = Deno[Deno.internal].core.ops.get_cron();
   const history = JSON.parse(data);
   return history;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getCron() {
   return get_cron();
 }

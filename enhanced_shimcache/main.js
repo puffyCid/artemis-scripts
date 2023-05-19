@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/windows/shimcache.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shimcache.ts
 function get_shimcache() {
   const data = Deno[Deno.internal].core.ops.get_shimcache();
   const shim_array = JSON.parse(data);
   return shim_array;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getShimcache() {
   return get_shimcache();
 }

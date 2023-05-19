@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/macos/loginitems.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/loginitems.ts
 function get_loginitems() {
   const data = Deno[Deno.internal].core.ops.get_loginitems();
   const items = JSON.parse(data);
   return items;
 }
 
-// https://github.com/puffycid/artemis-api/src/macos/macho.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/macho.ts
 function get_macho(path) {
   const data = Deno[Deno.internal].core.ops.get_macho(path);
   if (data === "") {
@@ -15,7 +15,7 @@ function get_macho(path) {
   return macho;
 }
 
-// https://github.com/puffycid/artemis-api/src/macos/plist.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/plist.ts
 function get_plist(path) {
   const data = Deno[Deno.internal].core.ops.get_plist(path);
   if (data === "") {
@@ -25,7 +25,7 @@ function get_plist(path) {
   return log_data;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getPlist(path) {
   return get_plist(path);
 }

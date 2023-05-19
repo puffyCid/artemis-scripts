@@ -1,5 +1,5 @@
-import { getLnkFile } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Shortcut } from "https://github.com/puffycid/artemis-api/src/windows/shortcuts.ts";
+import { getLnkFile } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Shortcut } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shortcuts.ts";
 
 function main() {
   const drive = Deno.env.get("SystemDrive");

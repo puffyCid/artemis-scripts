@@ -1,5 +1,5 @@
-import { getEventLogs } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { EventLogRecord } from "https://github.com/puffycid/artemis-api/src/windows/eventlogs.ts";
+import { getEventLogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
 
 interface Logon {
   timestamp: number;

@@ -1,5 +1,5 @@
-import { getShimcache } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Shimcache } from "https://github.com/puffycid/artemis-api/src/windows/shimcache.ts";
+import { getShimcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Shimcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shimcache.ts";
 
 import {
   crypto,

@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/applications/safari.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/safari.ts
 function get_safari_downloads(path) {
   const data = Deno[Deno.internal].core.ops.get_safari_downloads(path);
   const downloads = JSON.parse(data);
   return downloads;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getSafariDownloads(path) {
   return get_safari_downloads(path);
 }

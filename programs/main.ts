@@ -1,5 +1,5 @@
-import { getRegistry } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Registry } from "https://github.com/puffycid/artemis-api/src/windows/registry.ts";
+import { getRegistry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Registry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts";
 
 interface InstalledPrograms {
   name: string;

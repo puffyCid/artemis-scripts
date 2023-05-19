@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/windows/registry.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts
 function get_registry(path) {
   const data = Deno[Deno.internal].core.ops.get_registry(path);
   const reg_array = JSON.parse(data);
   return reg_array;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getRegistry(path) {
   return get_registry(path);
 }

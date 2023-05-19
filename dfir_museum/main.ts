@@ -11,11 +11,11 @@ import {
   getSrumEnergyUsage,
   getSrumNetworkInfo,
   getSrumNotifications,
-} from "https://github.com/puffycid/artemis-api/mod.ts";
-import { EventLogRecord } from "https://github.com/puffycid/artemis-api/src/windows/eventlogs.ts";
-import { Prefetch } from "https://github.com/puffycid/artemis-api/src/windows/prefetch.ts";
-import { Registry } from "https://github.com/puffycid/artemis-api/src/windows/registry.ts";
-import { Shortcut } from "https://github.com/puffycid/artemis-api/src/windows/shortcuts.ts";
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
+import { Prefetch } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/prefetch.ts";
+import { Registry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts";
+import { Shortcut } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shortcuts.ts";
 import {
   ApplicationInfo,
   ApplicationTimeline,
@@ -25,7 +25,7 @@ import {
   NetworkConnectivityInfo,
   NetworkInfo,
   NotificationInfo,
-} from "https://github.com/puffycid/artemis-api/src/windows/srum.ts";
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/srum.ts";
 
 const start_path = "C:\\DFIRArtifactMuseum";
 
@@ -40,7 +40,7 @@ interface DFIRTests {
 
 /**
  * A script to run against the DFIR Musuem repo to test `artemis` against multiple Windows artifacts
- * https://github.com/AndrewRathbun/DFIRArtifactMuseum
+ * https://raw.githubusercontent.com/AndrewRathbun/DFIRArtifactMuseum
  *
  * The purpose of this script is to ensure `artemis` does not crash and to test against a wide variety of different Windows OS aritfacts
  *

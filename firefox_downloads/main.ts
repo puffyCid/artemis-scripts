@@ -1,5 +1,5 @@
-import { getFirefoxDownloads } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { RawFirefoxDownloads } from "https://github.com/puffycid/artemis-api/src/applications/firefox.ts";
+import { getFirefoxDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { RawFirefoxDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/firefox.ts";
 
 function main() {
   return recurse_dir("/Users");

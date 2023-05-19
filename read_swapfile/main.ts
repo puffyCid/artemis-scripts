@@ -1,4 +1,4 @@
-import { readRawFile } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { readRawFile } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 /**
  * Simple function to show that we can read any locked file

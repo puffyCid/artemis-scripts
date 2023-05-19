@@ -1,4 +1,4 @@
-import { SearchEntry } from "https://github.com/puffycid/artemis-api/src/windows/search.ts";
+import { SearchEntry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/search.ts";
 
 /**
  * Filters a provided Windows Search arguement to only return entries that have ".lnk" string in properties

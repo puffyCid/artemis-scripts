@@ -1,5 +1,5 @@
-import { getFirefoxHistory } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { RawFirefoxHistory } from "https://github.com/puffycid/artemis-api/src/applications/firefox.ts";
+import { getFirefoxHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { RawFirefoxHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/firefox.ts";
 
 /**
  * Parse Firefox history for artemis test file

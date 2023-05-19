@@ -1,5 +1,5 @@
-import { getSearch } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { SearchEntry } from "https://github.com/puffycid/artemis-api/src/windows/search.ts";
+import { getSearch } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { SearchEntry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/search.ts";
 
 /**
  * Simple script to parse Windows Search database.

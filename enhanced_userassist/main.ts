@@ -1,5 +1,5 @@
-import { getUserAssist } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { UserAssist } from "https://github.com/puffycid/artemis-api/src/windows/userassist.ts";
+import { getUserAssist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { UserAssist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/userassist.ts";
 import {
   crypto,
   toHashString,

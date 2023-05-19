@@ -1,4 +1,4 @@
-import { getPrefetch } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getPrefetch } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 /**
  * Get all prefetch data at default path (C:\Windows\Prefetch)

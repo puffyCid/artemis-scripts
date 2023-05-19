@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/windows/registry.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts
 function get_registry(path) {
   const data = Deno[Deno.internal].core.ops.get_registry(path);
   const reg_array = JSON.parse(data);
   return reg_array;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getRegistry(path) {
   return get_registry(path);
 }
@@ -29,7 +29,7 @@ function grab_info(reg) {
       install_date: "",
       uninstall_string: "",
       url_info: "",
-      reg_path: entries.path,
+      reg_path: entries.path
     };
     for (const value of entries.values) {
       switch (value.value) {
@@ -73,11 +73,9 @@ function main() {
   const reg = getRegistry(path);
   const programs = [];
   for (const entries of reg) {
-    if (
-      !entries.path.includes(
-        "Microsoft\\Windows\\CurrentVersion\\Uninstall",
-      )
-    ) {
+    if (!entries.path.includes(
+      "Microsoft\\Windows\\CurrentVersion\\Uninstall"
+    )) {
       continue;
     }
     programs.push(entries);

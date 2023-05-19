@@ -1,4 +1,4 @@
-import { readAdsData } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { readAdsData } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 interface MarkOfWebFiles {
   /**Full path to file */

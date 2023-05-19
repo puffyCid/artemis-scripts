@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/applications/firefox.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/firefox.ts
 function get_firefox_downloads(path) {
   const data = Deno[Deno.internal].core.ops.get_firefox_downloads(path);
   const downloads = JSON.parse(data);
   return downloads;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getFirefoxDownloads(path) {
   return get_firefox_downloads(path);
 }

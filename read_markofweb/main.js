@@ -9,7 +9,7 @@ function decode(b64) {
   return bytes;
 }
 
-// https://github.com/puffycid/artemis-api/src/windows/ntfs.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/ntfs.ts
 function read_ads_data(path, ads_name) {
   const data = Deno[Deno.internal].core.ops.read_ads_data(
     path,
@@ -18,7 +18,7 @@ function read_ads_data(path, ads_name) {
   return decode(data);
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function readAdsData(path, ads_name) {
   return read_ads_data(path, ads_name);
 }

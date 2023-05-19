@@ -1,4 +1,4 @@
-import { getRegistry } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getRegistry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 interface OfficeMRU {
   file_path: string;

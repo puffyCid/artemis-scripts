@@ -1,11 +1,11 @@
-// https://github.com/puffycid/artemis-api/src/applications/firefox.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/firefox.ts
 function get_firefox_history(path) {
   const data = Deno[Deno.internal].core.ops.get_firefox_history(path);
   const history = JSON.parse(data);
   return history;
 }
 
-// https://github.com/puffycid/artemis-api/mod.ts
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
 function getFirefoxHistory(path) {
   return get_firefox_history(path);
 }
@@ -19,10 +19,7 @@ function recurse_dir(start_path) {
   let results = null;
   for (const entry of Deno.readDirSync(start_path)) {
     const path = `${start_path}/${entry.name}`;
-    if (
-      path.includes("test_data") && entry.name == "places.sqlite" &&
-      entry.isFile
-    ) {
+    if (path.includes("test_data") && entry.name == "places.sqlite" && entry.isFile) {
       results = getFirefoxHistory(path);
       return results;
     }

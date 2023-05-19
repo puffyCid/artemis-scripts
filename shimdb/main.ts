@@ -1,5 +1,5 @@
-import { getShimdb } from "https://github.com/puffycid/artemis-api/mod.ts";
-import { Shimdb } from "https://github.com/puffycid/artemis-api/src/windows/shimdb.ts";
+import { getShimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { Shimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shimdb.ts";
 
 /**
  * Parse Shimdb (SDB) files at default drive

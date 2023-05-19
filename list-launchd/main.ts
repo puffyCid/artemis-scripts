@@ -1,4 +1,4 @@
-import { getLaunchdAgents, getLaunchdDaemons } from "https://github.com/puffycid/artemis-api/mod.ts";
+import { getLaunchdAgents, getLaunchdDaemons } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 
 function main() {
   const agents = getLaunchdAgents();
