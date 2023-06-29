@@ -15,12 +15,12 @@ function main() {
   }
 
   // We are only interested in filtering Windows Search data, anything else we do not touch
-  if (args[ 1 ] != "search") {
-    return JSON.parse(args[ 0 ]);
+  if (args[1] != "search") {
+    return JSON.parse(args[0]);
   }
 
   // Parse the provide Serde Value (JSON string) as a SearchEntry[]
-  const data: SearchEntry[] = JSON.parse(args[ 0 ]);
+  const data: SearchEntry[] = JSON.parse(args[0]);
   const filter_entries: SearchEntry[] = [];
 
   for (const entry of data) {

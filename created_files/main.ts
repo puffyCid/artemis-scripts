@@ -11,7 +11,7 @@ function main() {
     return [];
   }
 
-  const data: WindowsFileInfo[] = JSON.parse(args[ 0 ]);
+  const data: WindowsFileInfo[] = JSON.parse(args[0]);
 
   const time_now = new Date();
   // Get current time

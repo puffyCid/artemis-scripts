@@ -15,7 +15,7 @@ function main() {
   }
 
   // Parse the provide Serde Value (JSON string) as a MacosFileInfo[]
-  const data: MacosFileInfo[] = JSON.parse(args[ 0 ]);
+  const data: MacosFileInfo[] = JSON.parse(args[0]);
   const filter_files: MacosFileInfo[] = [];
 
   for (const entry of data) {

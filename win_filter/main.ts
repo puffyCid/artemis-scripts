@@ -20,19 +20,19 @@ function grabEventLogs(): EventLogRecord[] {
     `${drive}\\Windows\\System32\\winevt\\Logs\\System.evtx`,
   );
   const service_installs: EventLogRecord[] = [];
-  const sus_services = [ ".bat", "powershell", "cmd.exe", "COMSPEC" ];
+  const sus_services = [".bat", "powershell", "cmd.exe", "COMSPEC"];
   for (const record of data) {
     if (
-      record.data[ "Event" ][ "System" ][ "EventID" ] != 7045 &&
-      record.data[ "Event" ][ "System" ][ "EventID" ][ "#text" ] != 7045
+      record.data["Event"]["System"]["EventID"] != 7045 &&
+      record.data["Event"]["System"]["EventID"]["#text"] != 7045
     ) {
       continue;
     }
 
     if (
-      record.data[ "Event" ][ "EventData" ][ "ServiceName" ].length === 16 ||
+      record.data["Event"]["EventData"]["ServiceName"].length === 16 ||
       sus_services.some((value) =>
-        record.data[ "Event" ][ "EventData" ][ "ImagePath" ]
+        record.data["Event"]["EventData"]["ImagePath"]
           .toLowerCase()
           .includes(value)
       )
@@ -51,7 +51,7 @@ function grabEventLogs(): EventLogRecord[] {
 function filterRegistry(data: string): RegistryData {
   const regs: RegistryData = JSON.parse(data);
 
-  const sus_run_keys = [ "cmd.exe", "powershell", "temp", "appdata", "script" ];
+  const sus_run_keys = ["cmd.exe", "powershell", "temp", "appdata", "script"];
   const sus_hit: RegistryData = {
     registry_file: regs.registry_file,
     registry_path: regs.registry_path,
@@ -156,16 +156,16 @@ function main() {
     return grabEventLogs();
   }
 
-  if (args[ 1 ] === "registry") {
-    return filterRegistry(args[ 0 ]);
+  if (args[1] === "registry") {
+    return filterRegistry(args[0]);
   }
 
-  if (args[ 1 ] === "bits") {
-    return filterBits(args[ 0 ]);
+  if (args[1] === "bits") {
+    return filterBits(args[0]);
   }
 
   // We received unknown type of data, returning back unfiltered
-  return JSON.parse(args[ 0 ]);
+  return JSON.parse(args[0]);
 }
 
 main();

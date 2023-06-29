@@ -52,12 +52,12 @@ function main(): OfficeMRU[] {
           const windows_nano = 10000000;
           const seconds_to_unix = 11644473600;
           const filetime = parseInt(
-            value.data.split("[T")[ 1 ].split("]")[ 0 ],
+            value.data.split("[T")[1].split("]")[0],
             16,
           );
           const unixepoch = filetime / windows_nano - seconds_to_unix;
           const mru: OfficeMRU = {
-            file_path: value.data.split("*")[ 1 ],
+            file_path: value.data.split("*")[1],
             reg_path: reg_entry.path,
             last_opened: unixepoch,
             last_opened_filetime: filetime,

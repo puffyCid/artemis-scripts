@@ -29,7 +29,7 @@ function grab_info(reg) {
       install_date: "",
       uninstall_string: "",
       url_info: "",
-      reg_path: entries.path
+      reg_path: entries.path,
     };
     for (const value of entries.values) {
       switch (value.value) {
@@ -73,9 +73,11 @@ function main() {
   const reg = getRegistry(path);
   const programs = [];
   for (const entries of reg) {
-    if (!entries.path.includes(
-      "Microsoft\\Windows\\CurrentVersion\\Uninstall"
-    )) {
+    if (
+      !entries.path.includes(
+        "Microsoft\\Windows\\CurrentVersion\\Uninstall",
+      )
+    ) {
       continue;
     }
     programs.push(entries);

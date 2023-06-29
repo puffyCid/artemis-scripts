@@ -19,7 +19,10 @@ function recurse_dir(start_path) {
   let results = null;
   for (const entry of Deno.readDirSync(start_path)) {
     const path = `${start_path}/${entry.name}`;
-    if (path.includes("test_data") && entry.name == "places.sqlite" && entry.isFile) {
+    if (
+      path.includes("test_data") && entry.name == "places.sqlite" &&
+      entry.isFile
+    ) {
       results = getFirefoxHistory(path);
       return results;
     }

@@ -1,5 +1,11 @@
-import { getGroups, getUsers } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { Groups, Users } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/accounts.ts";
+import {
+  getGroups,
+  getUsers,
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import {
+  Groups,
+  Users,
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/accounts.ts";
 
 interface Accounts {
   users: Users[];
