@@ -1,27 +1,38 @@
-// deno-fmt-ignore-file
-// deno-lint-ignore-file
-// This code was bundled using `deno bundle` and it's not recommended to edit it manually
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/fsevents.ts
+function get_fsevents(path) {
+  const data = Deno[Deno.internal].core.ops.get_fsevents(path);
+  if (data === "") {
+    return null;
+  }
+  const fsevents = JSON.parse(data);
+  return fsevents;
+}
 
-function get_fsevents() {
-    const data = Deno[Deno.internal].core.ops.get_fsevents(false);
-    if (data === "") {
-        return [];
-    }
-    const fsevents = JSON.parse(data);
-    return fsevents;
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
+function getFsEvents(path) {
+  return get_fsevents(path);
 }
-function getFsEvents() {
-    return get_fsevents();
-}
+
+// main.ts
 function main() {
-    const data = getFsEvents();
-    const rs_data = [];
-    for (const entry of data){
-        if (entry.path.includes("rs")) {
-            rs_data.push(entry);
-        }
+  const fs_data = [];
+  const fsevents_path = "/System/Volumes/Data/.fseventsd";
+  for (const entry of Deno.readDirSync(fsevents_path)) {
+    if (!entry.isFile) {
+      continue;
     }
-    return rs_data;
+    const fsevents_file = `${fsevents_path}/${entry.name}`;
+    const info = getFsEvents(fsevents_file);
+    if (info === null) {
+      continue;
+    }
+    for (const fsevent_entry of info) {
+      if (!fsevent_entry.path.includes(".rs")) {
+        continue;
+      }
+      fs_data.push(fsevent_entry);
+    }
+  }
+  return fs_data;
 }
 main();
-

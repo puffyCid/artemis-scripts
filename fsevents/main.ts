@@ -6,15 +6,28 @@ import { Fsevents } from "https://raw.githubusercontent.com/puffycid/artemis-api
  * @returns Array of FsEvent records that include "rs"
  */
 function main() {
-  const data = getFsEvents();
-  const rs_data: Fsevents[] = [];
+  const fs_data: Fsevents[] = [];
+  const fsevents_path = "/System/Volumes/Data/.fseventsd";
 
-  for (const entry of data) {
-    if (entry.path.includes("rs")) {
-      rs_data.push(entry);
+  for (const entry of Deno.readDirSync(fsevents_path)) {
+    if (!entry.isFile) {
+      continue;
+    }
+    const fsevents_file = `${fsevents_path}/${entry.name}`;
+    const info = getFsEvents(fsevents_file);
+    if (info === null) {
+      continue;
+    }
+
+    for (const fsevent_entry of info) {
+      if (!fsevent_entry.path.includes(".rs")) {
+        continue;
+      }
+      fs_data.push(fsevent_entry)
     }
   }
-  return rs_data;
+
+  return fs_data;
 }
 
 main();
