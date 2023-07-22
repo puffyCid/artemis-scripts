@@ -7,7 +7,6 @@ async function main() {
   const files = readDir(start);
   const data: FileInfo[] = [];
   for await (const entry of files) {
-    console.log(`value: ${entry.full_path}`);
     if (typeof entry.inode === "bigint") {
       entry.inode = entry.inode.toString();
     }

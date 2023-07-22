@@ -1,3 +1,9 @@
+import {
+  readDir,
+  readTextFile,
+  stat,
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
+
 interface HomebrewReceipt extends HomebrewFormula {
   installedAsDependency: boolean;
   installedOnRequest: boolean;
@@ -37,7 +43,7 @@ class Homebrew {
    * @returns Updated HomebrewReceipt object
    */
   public readRuby(path: string): HomebrewFormula {
-    const rubyText = Deno.readTextFileSync(path);
+    const rubyText = readTextFile(path);
     const descriptoin = rubyText.match(this.desc);
     const receipt: HomebrewFormula = {
       description: "",
@@ -75,6 +81,26 @@ class Homebrew {
   }
 
   /**
+   * Parse a JSON file associated with Cask
+   * @param path Path to cask json file
+   * @returns `HomebrewFormula`
+   */
+  public readJson(path: string): HomebrewFormula {
+    const data = readTextFile(path);
+    const jsonData = JSON.parse(data);
+    const brew: HomebrewFormula = {
+      description: jsonData["desc"],
+      homepage: jsonData["homepage"],
+      url: jsonData["url"],
+      license: jsonData["license"],
+      caskName: jsonData["name"],
+      formulaPath: path,
+    };
+
+    return brew;
+  }
+
+  /**
    * @param path Path to formula INSTALL_RECEIPT.json file to read
    * @param name Homebrew formula name
    * @returns HomebrewReceipt object
@@ -84,7 +110,7 @@ class Homebrew {
     name: string,
     formula: HomebrewFormula,
   ): HomebrewReceipt {
-    const data = Deno.readTextFileSync(path);
+    const data = readTextFile(path);
     const jsonData = JSON.parse(data);
     const receipt: HomebrewReceipt = {
       installedAsDependency: jsonData["installed_as_dependency"],
@@ -104,32 +130,35 @@ class Homebrew {
   }
 }
 
-function start_drinking(path: string): Array<HomebrewFormula> {
+async function start_drinking(path: string): Promise<Array<HomebrewFormula>> {
   const casks: Array<HomebrewFormula> = [];
-
-  for (const entry of Deno.readDirSync(path)) {
-    if (!entry.isDirectory) {
+  const entries = readDir(path);
+  for await (const entry of entries) {
+    if (!entry.is_directory) {
       continue;
     }
 
-    const caskName = `${path}/${entry.name}/.metadata`;
+    const caskName = `${path}/${entry.filename}/.metadata`;
     const caskData = new Homebrew();
 
-    for (const versionEntry of Deno.readDirSync(caskName)) {
-      if (!versionEntry.isDirectory) {
+    const entries = readDir(caskName);
+    for await (const versionEntry of entries) {
+      if (!versionEntry.is_directory) {
         continue;
       }
-      const caskName = `${path}/${entry.name}/.metadata/${versionEntry.name}`;
+      const caskName =
+        `${path}/${entry.filename}/.metadata/${versionEntry.filename}`;
 
-      for (const timeVersion of Deno.readDirSync(caskName)) {
-        if (!versionEntry.isDirectory) {
+      const entries = readDir(caskName);
+      for await (const timeVersion of entries) {
+        if (!versionEntry.is_directory) {
           continue;
         }
         try {
           const formulaPath =
-            `${path}/${entry.name}/.metadata/${versionEntry.name}/${timeVersion.name}/Casks/${entry.name}.rb`;
-          const formulaInfo = Deno.lstatSync(formulaPath);
-          if (formulaInfo.isFile) {
+            `${path}/${entry.filename}/.metadata/${versionEntry.filename}/${timeVersion.filename}/Casks/${entry.filename}.rb`;
+          const formulaInfo = stat(formulaPath);
+          if (formulaInfo.is_file) {
             let receipt: HomebrewFormula = {
               description: "",
               homepage: "",
@@ -143,9 +172,9 @@ function start_drinking(path: string): Array<HomebrewFormula> {
           }
         } catch (_e) {
           const formulaPath =
-            `${path}/${entry.name}/.metadata/${versionEntry.name}/${timeVersion.name}/Casks/${entry.name}.json`;
-          const formulaInfo = Deno.lstatSync(formulaPath);
-          if (formulaInfo.isFile) {
+            `${path}/${entry.filename}/.metadata/${versionEntry.filename}/${timeVersion.filename}/Casks/${entry.filename}.json`;
+          const formulaInfo = stat(formulaPath);
+          if (formulaInfo.is_file) {
             let receipt: HomebrewFormula = {
               description: "",
               homepage: "",
@@ -154,7 +183,7 @@ function start_drinking(path: string): Array<HomebrewFormula> {
               caskName: "",
               formulaPath,
             };
-            receipt = caskData.readRuby(formulaPath);
+            receipt = caskData.readJson(formulaPath);
             casks.push(receipt);
           }
         }
@@ -167,46 +196,48 @@ function start_drinking(path: string): Array<HomebrewFormula> {
 /**
  * Get information on all installed `Homebrew Casks`
  */
-function listCasks(): Array<HomebrewFormula> {
+async function listCasks(): Promise<Array<HomebrewFormula>> {
   const path = "/usr/local/Caskroom";
   try {
-    return start_drinking(path);
+    return await start_drinking(path);
   } catch (_) {
-    return start_drinking("/opt/homebrew/Caskroom");
+    return await start_drinking("/opt/homebrew/Caskroom");
   }
 }
 
-function start_brewing(path: string): Array<HomebrewReceipt> {
+async function start_brewing(path: string): Promise<HomebrewReceipt[]> {
   const brew_receipts: Array<HomebrewReceipt> = [];
 
-  for (const entry of Deno.readDirSync(path)) {
-    if (!entry.isDirectory) {
+  const entries = readDir(path);
+  for await (const entry of entries) {
+    if (!entry.is_directory) {
       continue;
     }
-    const brew_name = `${path}/${entry.name}`;
+    const brew_name = `${path}/${entry.filename}`;
     const brewData = new Homebrew();
-    for (const brew_entry of Deno.readDirSync(brew_name)) {
-      if (!brew_entry.isDirectory) {
+    const entries = readDir(brew_name);
+    for await (const brew_entry of entries) {
+      if (!brew_entry.is_directory) {
         continue;
       }
 
       const receiptPath =
-        `${path}/${entry.name}/${brew_entry.name}/INSTALL_RECEIPT.json`;
+        `${path}/${entry.filename}/${brew_entry.filename}/INSTALL_RECEIPT.json`;
       const formulaPath =
-        `${path}/${entry.name}/${brew_entry.name}/.brew/${entry.name}.rb`;
+        `${path}/${entry.filename}/${brew_entry.filename}/.brew/${entry.filename}.rb`;
 
-      const receipt_info = Deno.lstatSync(receiptPath);
-      if (!receipt_info.isFile) {
+      const receipt_info = stat(receiptPath);
+      if (!receipt_info.is_file) {
         continue;
       }
-      const formulaInfo = Deno.lstatSync(formulaPath);
-      if (!formulaInfo.isFile) {
+      const formulaInfo = stat(formulaPath);
+      if (!formulaInfo.is_file) {
         continue;
       }
       const formula = brewData.readRuby(formulaPath);
       const receipt = brewData.readReceipts(
         receiptPath,
-        entry.name,
+        entry.filename,
         formula,
       );
 
@@ -219,12 +250,12 @@ function start_brewing(path: string): Array<HomebrewReceipt> {
 /**
  * Get information on all installed `Homebrew Formulas`
  */
-function listReceipts(): Array<HomebrewReceipt> {
+async function listReceipts(): Promise<HomebrewReceipt[]> {
   const path = "/usr/local/Cellar";
   try {
-    return start_brewing(path);
+    return await start_brewing(path);
   } catch (_) {
-    return start_brewing("/opt/homebrew/Cellar");
+    return await start_brewing("/opt/homebrew/Cellar");
   }
 }
 
@@ -232,9 +263,9 @@ function listReceipts(): Array<HomebrewReceipt> {
  * Entry function for `Deno`!
  * Parses Homebrew info without using any `Artemis` functions
  */
-function main(): HomebrewData {
-  const brew = listReceipts();
-  const casks = listCasks();
+async function main(): Promise<HomebrewData> {
+  const brew = await listReceipts();
+  const casks = await listCasks();
   const homebrew: HomebrewData = {
     packages: brew,
     casks: casks,
