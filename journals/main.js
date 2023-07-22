@@ -14,7 +14,7 @@ function outputResults(data, data_name, output) {
   const status = Deno[Deno.internal].core.ops.output_results(
     data,
     data_name,
-    output_string
+    output_string,
   );
   return status;
 }
@@ -25,11 +25,11 @@ function main() {
   const out = {
     name: "deno_journals",
     directory: "./tmp",
-    format: "json" /* JSON */,
+    format: "json", /* JSON */
     compress: false,
     endpoint_id: "anything-i-want",
     collection_id: 1,
-    output: "local" /* LOCAL */
+    output: "local", /* LOCAL */
   };
   for (const entry of Deno.readDirSync(journals)) {
     if (!entry.isDirectory) {

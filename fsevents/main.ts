@@ -23,7 +23,7 @@ function main() {
       if (!fsevent_entry.path.includes(".rs")) {
         continue;
       }
-      fs_data.push(fsevent_entry)
+      fs_data.push(fsevent_entry);
     }
   }
 

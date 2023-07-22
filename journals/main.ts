@@ -1,5 +1,10 @@
 import { getJournal } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { Output,Format,OutputType, outputResults } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/system/output.ts";
+import {
+  Format,
+  Output,
+  outputResults,
+  OutputType,
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/system/output.ts";
 
 function main() {
   const journals = "/var/log/journal";
