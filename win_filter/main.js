@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts
 function get_eventlogs(path) {
-  const data = Deno[Deno.internal].core.ops.get_eventlogs(path);
+  const data = Deno.core.ops.get_eventlogs(path);
   const log_array = JSON.parse(data);
   return log_array;
 }
@@ -12,7 +12,7 @@ function getEventLogs(path) {
 
 // main.ts
 function grabEventLogs() {
-  const drive = Deno.env.get("SystemDrive");
+  const drive = getEnvValue("SystemDrive");
   if (drive === void 0) {
     return [];
   }
@@ -122,7 +122,7 @@ function filterBits(data) {
   return sus_bits;
 }
 function main() {
-  const args = Deno.args;
+  const args = STATIC_ARGS;
   if (args.length < 2) {
     return grabEventLogs();
   }

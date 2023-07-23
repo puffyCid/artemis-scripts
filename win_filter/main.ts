@@ -1,4 +1,5 @@
 import { getEventLogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
 import { Bits } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/bits.ts";
 import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
 import {
@@ -11,8 +12,8 @@ import {
  * @returns Service install event log entries with sus associated commands or 16 character name
  */
 function grabEventLogs(): EventLogRecord[] {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === undefined) {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return [];
   }
 
@@ -148,7 +149,7 @@ function filterBits(data: string): Bits {
  * @returns Anything
  */
 function main() {
-  const args = Deno.args;
+  const args = STATIC_ARGS;
 
   // If we received no filtered data (args.length === 0)
   // Then we wil run as a regular script

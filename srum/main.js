@@ -4,7 +4,7 @@
 
 function get_srum_application_info(path) {
     const name = "{D10CA2FE-6FCF-4F6D-848E-B2E99266FA89}";
-    const data = Deno[Deno.internal].core.ops.get_srum(path, name);
+    const data = Deno.core.ops.get_srum(path, name);
     const srum = JSON.parse(data);
     return srum;
 }

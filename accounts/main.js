@@ -3,12 +3,12 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_users() {
-    const data = Deno[Deno.internal].core.ops.get_users();
+    const data = Deno.core.ops.get_users();
     const users = JSON.parse(data);
     return users;
 }
 function get_groups() {
-    const data = Deno[Deno.internal].core.ops.get_groups();
+    const data = Deno.core.ops.get_groups();
     const groups = JSON.parse(data);
     return groups;
 }

@@ -1,16 +1,12 @@
 import { getShimcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { Shimcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shimcache.ts";
-
-import {
-  crypto,
-  toHashString,
-} from "https://deno.land/std@0.173.0/crypto/mod.ts";
-
+import { stat } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
+import { hash } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/files.ts";
 interface EnhancedShimcache extends Shimcache {
   md5: string;
   created: number;
   modified: number;
-  accessed: number | undefined;
+  accessed: number;
   size: number;
 }
 
@@ -35,21 +31,19 @@ function main() {
 
   for (const entry of shimcache_entries) {
     try {
-      const info = Deno.statSync(entry.path);
-      const data = Deno.readFileSync(entry.path);
-      const hash = crypto.subtle.digestSync("MD5", data);
+      const info = stat(entry.path);
 
-      if (info.mtime === null || info.birthtime === null) {
+      if (info.modified === null || info.created === null) {
         const shim = create_entry(entry);
         shim_array.push(shim);
         continue;
       }
 
       const shim: EnhancedShimcache = {
-        md5: toHashString(hash),
-        created: info.birthtime.getTime(),
-        modified: info.mtime.getTime(),
-        accessed: info.atime?.getTime(),
+        md5: hash(entry.path, true, false, false).md5,
+        created: info.created,
+        modified: info.modified,
+        accessed: info.accessed,
         size: info.size,
         entry: entry.entry,
         path: entry.path,

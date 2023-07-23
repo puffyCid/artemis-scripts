@@ -1,4 +1,9 @@
 import { getRegistry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
+import {
+  readDir,
+  stat,
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 interface OfficeMRU {
   file_path: string;
@@ -15,20 +20,20 @@ interface OfficeMRU {
  * It reads the raw Registry file (NTUSER.DAT) so even if the user is not logged on the Registry file will still get parsed
  * @returns Array of recently opened office documents
  */
-function main(): OfficeMRU[] {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === undefined) {
+async function main(): Promise<OfficeMRU[]> {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return [];
   }
   const office_array: OfficeMRU[] = [];
   const users = `${drive}\\Users`;
 
   // Get all users and try to parse their NTUSER.DAT file
-  for (const entry of Deno.readDirSync(users)) {
+  for await (const entry of readDir(users)) {
     try {
-      const path = `${users}\\${entry.name}\\NTUSER.DAT`;
-      const status = Deno.lstatSync(path);
-      if (!status.isFile) {
+      const path = `${users}\\${entry.filename}\\NTUSER.DAT`;
+      const status = stat(path);
+      if (!status.is_file) {
         continue;
       }
 

@@ -11,7 +11,7 @@ function decode(b64) {
 
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/ntfs.ts
 function read_ads_data(path, ads_name) {
-  const data = Deno[Deno.internal].core.ops.read_ads_data(
+  const data = Deno.core.ops.read_ads_data(
     path,
     ads_name,
   );
@@ -25,27 +25,27 @@ function readAdsData(path, ads_name) {
 
 // main.ts
 function main() {
-  const drive = Deno.env.get("SystemDrive");
+  const drive = getEnvValue("SystemDrive");
   if (drive === void 0) {
     return [];
   }
   const web_files = [];
   const users = `${drive}\\Users`;
-  for (const entry of Deno.readDirSync(users)) {
+  for (const entry of readDir(users)) {
     try {
-      const path = `${users}\\${entry.name}\\Downloads`;
-      for (const file_entry of Deno.readDirSync(path)) {
+      const path = `${users}\\${entry.filename}\\Downloads`;
+      for (const file_entry of readDir(path)) {
         try {
-          if (!file_entry.isFile) {
+          if (!file_entry.is_file) {
             continue;
           }
-          const full_path = `${path}\\${file_entry.name}`;
+          const full_path = `${path}\\${file_entry.filename}`;
           const ads = "Zone.Identifier";
           const data = readAdsData(full_path, ads);
           if (data.length === 0) {
             continue;
           }
-          const info = Deno.statSync(full_path);
+          const info = stat(full_path);
           if (
             info.mtime === null || info.birthtime === null ||
             info.atime === null

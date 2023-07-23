@@ -1,4 +1,6 @@
 import { getSearch } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
+import { stat } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 import { SearchEntry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/search.ts";
 
 /**
@@ -9,16 +11,16 @@ import { SearchEntry } from "https://raw.githubusercontent.com/puffycid/artemis-
  * @returns Array of `SearchEntry`
  */
 function main(): SearchEntry[] {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === undefined) {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return [];
   }
   const path =
     `${drive}\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows`;
   try {
     const search_path = `${path}\\Windows.edb`;
-    const status = Deno.lstatSync(search_path);
-    if (!status.isFile) {
+    const status = stat(search_path);
+    if (!status.is_file) {
       // This is odd...
       return [];
     }
@@ -26,8 +28,8 @@ function main(): SearchEntry[] {
     return results;
   } catch (_e) {
     const search_path = `${path}\\Windows.db`;
-    const status = Deno.lstatSync(search_path);
-    if (!status.isFile) {
+    const status = stat(search_path);
+    if (!status.is_file) {
       // This is odd...
       return [];
     }

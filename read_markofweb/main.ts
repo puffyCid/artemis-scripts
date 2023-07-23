@@ -1,16 +1,20 @@
 import { readAdsData } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-
+import {
+  readDir,
+  stat,
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
+import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
 interface MarkOfWebFiles {
   /**Full path to file */
   path: string;
   /**Strings associated with mark of the web */
   mark: string;
   /**Standard Information timestamp */
-  created: Date;
+  created: number;
   /**Standard Information timestamp */
-  modified: Date;
+  modified: number;
   /**Standard Information timestamp */
-  accessed: Date;
+  accessed: number;
   /**Size of file */
   size: number;
 }
@@ -19,22 +23,22 @@ interface MarkOfWebFiles {
  * Read the `Mark of the web` (ADS) data associated with files in all User downloads directories
  * `https://redcanary.com/blog/iso-files/`
  */
-function main() {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === undefined) {
+async function main() {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return [];
   }
   const web_files = [];
   const users = `${drive}\\Users`;
-  for (const entry of Deno.readDirSync(users)) {
+  for await (const entry of readDir(users)) {
     try {
-      const path = `${users}\\${entry.name}\\Downloads`;
-      for (const file_entry of Deno.readDirSync(path)) {
+      const path = `${users}\\${entry.filename}\\Downloads`;
+      for await (const file_entry of readDir(path)) {
         try {
-          if (!file_entry.isFile) {
+          if (!file_entry.is_file) {
             continue;
           }
-          const full_path = `${path}\\${file_entry.name}`;
+          const full_path = `${path}\\${file_entry.filename}`;
           const ads = "Zone.Identifier";
 
           const data = readAdsData(full_path, ads);
@@ -43,12 +47,12 @@ function main() {
           if (data.length === 0) {
             continue;
           }
-          const info = Deno.statSync(full_path);
+          const info = stat(full_path);
           // Skip files if we cant get timestamps
           if (
-            info.mtime === null ||
-            info.birthtime === null ||
-            info.atime === null
+            info.modified === null ||
+            info.created === null ||
+            info.accessed === null
           ) {
             continue;
           }
@@ -57,9 +61,9 @@ function main() {
           const web_file: MarkOfWebFiles = {
             mark: mark_info,
             path: full_path,
-            created: info.birthtime,
-            modified: info.mtime,
-            accessed: info.atime,
+            created: info.created,
+            modified: info.mode,
+            accessed: info.accessed,
             size: info.size,
           };
 

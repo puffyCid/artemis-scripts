@@ -12,21 +12,21 @@ function decode(b64) {
     return bytes;
 }
 function read_raw_file(path) {
-    const data = Deno[Deno.internal].core.ops.read_raw_file(path);
+    const data = Deno.core.ops.read_raw_file(path);
     return decode(data);
 }
 function readRawFile(path) {
     return read_raw_file(path);
 }
 function main() {
-    const drive = Deno.env.get("SystemDrive");
+    const drive = getEnvValue("SystemDrive");
     if (drive === undefined) {
         return 0;
     }
     try {
         const swap = `${drive}\\swapfile.sys`;
-        const info = Deno.statSync(swap);
-        if (!info.isFile) {
+        const info = stat(swap);
+        if (!info.is_file) {
             return 0;
         }
         if (info.size > 2147483648) {

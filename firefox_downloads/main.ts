@@ -1,32 +1,34 @@
 import { getFirefoxDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { RawFirefoxDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/firefox.ts";
+import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
-function main() {
-  return recurse_dir("/Users");
+async function main() {
+  return await recurse_dir("/Users");
 }
 
 /**
  * Simple function to recursively walk the filesystem
  * @param start_path Directory to transverse
  */
-function recurse_dir(
+async function recurse_dir(
   start_path: string,
-): RawFirefoxDownloads[] | null {
+): Promise<RawFirefoxDownloads[] | null> {
   let results = null;
-  for (const entry of Deno.readDirSync(start_path)) {
-    const path = `${start_path}/${entry.name}`;
+  for await (const entry of readDir(start_path)) {
+    const path = `${start_path}/${entry.filename}`;
 
     if (
-      path.includes("test_data") && entry.name == "places_downloads.sqlite" &&
-      entry.isFile
+      path.includes("test_data") &&
+      entry.filename == "places_downloads.sqlite" &&
+      entry.is_file
     ) {
       results = getFirefoxDownloads(path);
       return results;
     }
 
-    if (entry.isDirectory) {
+    if (entry.is_directory) {
       try {
-        results = recurse_dir(path);
+        results = await recurse_dir(path);
         if (results != null) {
           return results;
         }

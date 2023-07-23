@@ -3,7 +3,7 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_shimdb() {
-    const data = Deno[Deno.internal].core.ops.get_shimdb();
+    const data = Deno.core.ops.get_shimdb();
     const shim_array = JSON.parse(data);
     return shim_array;
 }

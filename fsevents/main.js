@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/fsevents.ts
-function get_fsevents(path) {
-  const data = Deno[Deno.internal].core.ops.get_fsevents(path);
+function getFsevents(path) {
+  const data = Deno.core.ops.get_fsevents(path);
   if (data === "") {
     return null;
   }
@@ -8,21 +8,22 @@ function get_fsevents(path) {
   return fsevents;
 }
 
-// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
-function getFsEvents(path) {
-  return get_fsevents(path);
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/directory.ts
+function readDir(path) {
+  const data = fs.readDir(path);
+  return data;
 }
 
 // main.ts
-function main() {
+async function main() {
   const fs_data = [];
   const fsevents_path = "/System/Volumes/Data/.fseventsd";
-  for (const entry of Deno.readDirSync(fsevents_path)) {
-    if (!entry.isFile) {
+  for await (const entry of readDir(fsevents_path)) {
+    if (!entry.is_file) {
       continue;
     }
-    const fsevents_file = `${fsevents_path}/${entry.name}`;
-    const info = getFsEvents(fsevents_file);
+    const fsevents_file = `${fsevents_path}/${entry.filename}`;
+    const info = getFsevents(fsevents_file);
     if (info === null) {
       continue;
     }

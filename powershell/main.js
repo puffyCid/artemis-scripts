@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts
 function get_eventlogs(path) {
-  const data = Deno[Deno.internal].core.ops.get_eventlogs(path);
+  const data = Deno.core.ops.get_eventlogs(path);
   const log_array = JSON.parse(data);
   return log_array;
 }

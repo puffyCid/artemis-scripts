@@ -1,30 +1,34 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/chromium.ts
-function get_chromium_downloads(path) {
-  const data = Deno[Deno.internal].core.ops.get_chromium_downloads(path);
+function getChromiumDownloads(path) {
+  const data = Deno.core.ops.get_chromium_downloads(path);
   const downloads = JSON.parse(data);
   return downloads;
 }
 
-// https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts
-function getChromiumDownloads(path) {
-  return get_chromium_downloads(path);
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/directory.ts
+function readDir(path) {
+  const data = fs.readDir(path);
+  return data;
 }
 
 // main.ts
-function main() {
-  return recurse_dir("/Users");
+async function main() {
+  return await recurse_dir("/Users");
 }
-function recurse_dir(start_path) {
+async function recurse_dir(start_path) {
   let results = null;
-  for (const entry of Deno.readDirSync(start_path)) {
-    const path = `${start_path}/${entry.name}`;
-    if (path.includes("test_data") && entry.name == "History" && entry.isFile) {
+  for await (const entry of readDir(start_path)) {
+    const path = `${start_path}/${entry.filename}`;
+    if (
+      path.includes("test_data") && entry.filename == "History" &&
+      entry.filename
+    ) {
       results = getChromiumDownloads(path);
       return results;
     }
-    if (entry.isDirectory) {
+    if (entry.is_directory) {
       try {
-        results = recurse_dir(path);
+        results = await recurse_dir(path);
         if (results != null) {
           return results;
         }

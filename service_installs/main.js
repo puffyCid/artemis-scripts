@@ -3,7 +3,7 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_eventlogs(path) {
-    const data = Deno[Deno.internal].core.ops.get_eventlogs(path);
+    const data = Deno.core.ops.get_eventlogs(path);
     const log_array = JSON.parse(data);
     return log_array;
 }

@@ -3,7 +3,7 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_bits(carve) {
-    const data = Deno[Deno.internal].core.ops.get_bits(carve);
+    const data = Deno.core.ops.get_bits(carve);
     const bits = JSON.parse(data);
     return bits;
 }

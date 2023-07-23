@@ -3,7 +3,7 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_pe(path) {
-    const data = Deno[Deno.internal].core.ops.get_pe(path);
+    const data = Deno.core.ops.get_pe(path);
     if (data === "") {
         return null;
     }
@@ -14,17 +14,17 @@ function getPe(path) {
     return get_pe(path);
 }
 function main() {
-    const drive = Deno.env.get("SystemDrive");
+    const drive = getEnvValue("SystemDrive");
     if (drive === undefined) {
         return [];
     }
     const path = `${drive}\\Windows\\System32`;
     const pes = [];
-    for (const entry of Deno.readDirSync(path)){
-        if (!entry.isFile) {
+    for (const entry of readDir(path)){
+        if (!entry.is_file) {
             continue;
         }
-        const pe_path = `${path}\\${entry.name}`;
+        const pe_path = `${path}\\${entry.filename}`;
         const info = getPe(pe_path);
         if (info === null) {
             continue;

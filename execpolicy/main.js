@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/execpolicy.ts
 function get_execpolicy() {
-  const data = Deno[Deno.internal].core.ops.get_execpolicy();
+  const data = Deno.core.ops.get_execpolicy();
   const policy = JSON.parse(data);
   return policy;
 }

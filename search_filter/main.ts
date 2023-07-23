@@ -9,7 +9,7 @@ import { SearchEntry } from "https://raw.githubusercontent.com/puffycid/artemis-
  */
 function main() {
   // Since this is a filter script our data will be passed as a Serde Value that is a string
-  const args = Deno.args;
+  const args = STATIC_ARGS;
   if (args.length < 2) {
     return [];
   }

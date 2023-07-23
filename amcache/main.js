@@ -3,7 +3,7 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_amcache() {
-    const data = Deno[Deno.internal].core.ops.get_amcache();
+    const data = Deno.core.ops.get_amcache();
     const amcache_array = JSON.parse(data);
     return amcache_array;
 }

@@ -1,6 +1,6 @@
 // main.ts
 function main() {
-  const args = Deno.args;
+  const args = STATIC_ARGS;
   if (args.length === 0) {
     return [];
   }

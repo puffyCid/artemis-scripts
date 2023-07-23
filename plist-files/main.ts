@@ -1,4 +1,5 @@
 import { getPlist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 interface PlistData {
   plist_content: Record<string, unknown>;
@@ -9,11 +10,11 @@ interface PlistData {
  * Script to parse all plist files found under `/Users`
  * @returns Array of parsed plist files and their location
  */
-function main(): PlistData[] {
+async function main(): Promise<PlistData[]> {
   const start_path = "/Users";
 
   const plist_files: PlistData[] = [];
-  recurse_dir(plist_files, start_path);
+  await recurse_dir(plist_files, start_path);
   return plist_files;
 }
 
@@ -22,15 +23,15 @@ function main(): PlistData[] {
  * @param plist_files Array to track parsed plist files
  * @param start_path Directory to transverse
  */
-function recurse_dir(
+async function recurse_dir(
   plist_files: PlistData[],
   start_path: string,
 ) {
-  for (const entry of Deno.readDirSync(start_path)) {
-    const plist_path = `${start_path}/${entry.name}`;
+  for await (const entry of readDir(start_path)) {
+    const plist_path = `${start_path}/${entry.filename}`;
 
     // Only parsing files that have plist extension
-    if (entry.isFile && entry.name.endsWith("plist")) {
+    if (entry.is_file && entry.filename.endsWith("plist")) {
       const data = getPlist(plist_path);
       if (data === null) {
         continue;
@@ -45,8 +46,8 @@ function recurse_dir(
       continue;
     }
 
-    if (entry.isDirectory) {
-      recurse_dir(plist_files, plist_path);
+    if (entry.is_directory) {
+      await recurse_dir(plist_files, plist_path);
     }
   }
 }

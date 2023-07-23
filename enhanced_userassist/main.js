@@ -3,7 +3,7 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_userassist() {
-    const data = Deno[Deno.internal].core.ops.get_userassist();
+    const data = Deno.core.ops.get_userassist();
     const assist_array = JSON.parse(data);
     return assist_array;
 }
@@ -3647,13 +3647,13 @@ class KeyStack {
     }
     [Symbol.for("Deno.customInspect")](inspect) {
         const { length  } = this;
-        return `${this.constructor.name} ${inspect({
+        return `${this.constructor.filename} ${inspect({
             length
         })}`;
     }
     [Symbol.for("nodejs.util.inspect.custom")](depth, options, inspect) {
         if (depth < 0) {
-            return options.stylize(`[${this.constructor.name}]`, "special");
+            return options.stylize(`[${this.constructor.filename}]`, "special");
         }
         const newOptions = Object.assign({}, options, {
             depth: options.depth === null ? null : options.depth - 1
@@ -3688,7 +3688,7 @@ function main() {
     const enhanced_assist = [];
     for (const entry of assist){
         try {
-            const info = Deno.statSync(entry.path);
+            const info = stat(entry.path);
             const data = Deno.readFileSync(entry.path);
             const hash = stdCrypto.subtle.digestSync("MD5", data);
             const enhance = {

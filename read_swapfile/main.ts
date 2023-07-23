@@ -1,4 +1,6 @@
 import { readRawFile } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
+import { stat } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 /**
  * Simple function to show that we can read any locked file
@@ -6,15 +8,15 @@ import { readRawFile } from "https://raw.githubusercontent.com/puffycid/artemis-
  * @returns Length of the swapfile.sys if it exists
  */
 function main() {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === undefined) {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return 0;
   }
   try {
     const swap = `${drive}\\swapfile.sys`;
-    const info = Deno.statSync(swap);
+    const info = stat(swap);
 
-    if (!info.isFile) {
+    if (!info.is_file) {
       return 0;
     }
 

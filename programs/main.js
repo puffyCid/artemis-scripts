@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts
 function get_registry(path) {
-  const data = Deno[Deno.internal].core.ops.get_registry(path);
+  const data = Deno.core.ops.get_registry(path);
   const reg_array = JSON.parse(data);
   return reg_array;
 }

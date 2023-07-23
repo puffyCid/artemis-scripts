@@ -124,7 +124,8 @@ function filterApps(data: string): AppsInfo[] {
  * @returns Anything
  */
 function main() {
-  const args = Deno.args;
+  //@ts-ignore: Part of Artemis global context
+  const args = STATIC_ARGS;
 
   // If we received no filtered data (args.length === 0)
   // Then we wil run as a regular script

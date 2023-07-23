@@ -12,6 +12,7 @@ import {
   getSrumNetworkInfo,
   getSrumNotifications,
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
 import { Prefetch } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/prefetch.ts";
 import { Registry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts";
@@ -47,13 +48,13 @@ interface DFIRTests {
  * Known minor issues:
  * See `bulkRegistry()`
  */
-function main() {
+async function main() {
   const amcaches = bulkAmcacheTests();
-  const shortcuts = bulkShortcuts();
+  const shortcuts = await bulkShortcuts();
   const prefetchs = bulkPrefetch();
-  const logs = bulkEventlogs();
+  const logs = await bulkEventlogs();
   const srums = bulkSRUM();
-  const registrys = bulkRegistry();
+  const registrys = await bulkRegistry();
   const results: DFIRTests = {
     amcaches,
     shortcuts,
@@ -93,7 +94,7 @@ function bulkAmcacheTests(): Registry[][] {
  * We should only get WARNINGS related FAT timestamps (which means the `Shellitems` in the shortcut data does not have a timestamp. Sometimes a timestamp may not exist even though it should.)
  * @returns List of parsed shortcuts
  */
-function bulkShortcuts(): Shortcut[] {
+async function bulkShortcuts(): Promise<Shortcut[]> {
   const shortcuts: Shortcut[] = [];
   const paths = [
     `${start_path}\\Windows\\LNK\\Win7`,
@@ -107,8 +108,8 @@ function bulkShortcuts(): Shortcut[] {
   ];
 
   for (const entry of paths) {
-    for (const file of Deno.readDirSync(entry)) {
-      const lnk_file = `${entry}\\${file.name}`;
+    for await (const file of readDir(entry)) {
+      const lnk_file = `${entry}\\${file.filename}`;
       console.log(`Parsing Shortcut ${lnk_file}`);
       const result = getLnkFile(lnk_file);
       shortcuts.push(result);
@@ -150,7 +151,7 @@ function bulkPrefetch(): Prefetch[][] {
  * The `evtx` crate returns lots warnings related to encountering integers when expecting boolean values. It coerces the integers to boolean
  * @returns Array of all event log entries for all evtx files
  */
-function bulkEventlogs(): EventLogRecord[][] {
+async function bulkEventlogs(): Promise<EventLogRecord[][]> {
   const logs: EventLogRecord[][] = [];
   const paths = [
     `${start_path}\\Windows\\EventLogs\\Win10\\RathbunVM`,
@@ -163,11 +164,11 @@ function bulkEventlogs(): EventLogRecord[][] {
   ];
 
   for (const entry of paths) {
-    for (const file of Deno.readDirSync(entry)) {
-      if (!file.name.includes("evtx")) {
+    for await (const file of readDir(entry)) {
+      if (!file.filename.includes("evtx")) {
         continue;
       }
-      const log_file = `${entry}\\${file.name}`;
+      const log_file = `${entry}\\${file.filename}`;
       console.log(`Parsing EventLogs directory ${log_file}`);
       const result = getEventLogs(log_file);
       logs.push(result);
@@ -251,7 +252,7 @@ function bulkSRUM(): SRUMTables {
  *
  * @returns An array of all parsed Registry files with all of their entries
  */
-function bulkRegistry(): Registry[][] {
+async function bulkRegistry(): Promise<Registry[][]> {
   const regs: Registry[][] = [];
   const paths = [
     `${start_path}\\Windows\\Registry\\Win10\\APTSimulatorVM\\SAM`,
@@ -311,8 +312,8 @@ function bulkRegistry(): Registry[][] {
   ];
 
   for (const entry of zim_paths) {
-    for (const file of Deno.readDirSync(entry)) {
-      const reg_file = `${entry}\\${file.name}`;
+    for await (const file of readDir(entry)) {
+      const reg_file = `${entry}\\${file.filename}`;
       console.log(`Parsing Zimmerman Reg file ${reg_file}`);
       try {
         const result = getRegistry(reg_file);

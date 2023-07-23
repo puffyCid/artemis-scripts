@@ -1,4 +1,6 @@
 import { getPe } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
+import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 import { PeInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/pe.ts";
 
 interface FileMeta {
@@ -10,20 +12,20 @@ interface FileMeta {
  * Parse `pe` files at `\Windows\System32`
  * @returns Array of pe metadata
  */
-function main(): FileMeta[] {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === undefined) {
+async function main(): Promise<FileMeta[]> {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return [];
   }
   const path = `${drive}\\Windows\\System32`;
 
   const pes: FileMeta[] = [];
-  for (const entry of Deno.readDirSync(path)) {
-    if (!entry.isFile) {
+  for await (const entry of readDir(path)) {
+    if (!entry.is_file) {
       continue;
     }
 
-    const pe_path = `${path}\\${entry.name}`;
+    const pe_path = `${path}\\${entry.filename}`;
     const info = getPe(pe_path);
     if (info === null) {
       continue;

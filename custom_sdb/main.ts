@@ -1,4 +1,6 @@
 import { getCustomShimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
+import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 import { Shimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shimdb.ts";
 
 /**
@@ -7,8 +9,8 @@ import { Shimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/m
  * @returns Array of custom shimdb data
  */
 function main(): Shimdb[] {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === undefined) {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return [];
   }
 
@@ -19,12 +21,12 @@ function main(): Shimdb[] {
   return custom_sdb;
 }
 
-function recurse_dir(sdbs: Shimdb[], start_path: string) {
-  for (const entry of Deno.readDirSync(start_path)) {
-    const sdb_path = `${start_path}\\${entry.name}`;
+async function recurse_dir(sdbs: Shimdb[], start_path: string) {
+  for await (const entry of readDir(start_path)) {
+    const sdb_path = `${start_path}\\${entry.filename}`;
     // A custom SDB file can exist anywhere and can have any extension
     // We read all files (smaller than 10MB) and check for a the sdb file signature
-    if (entry.isFile) {
+    if (entry.is_file) {
       const data = getCustomShimdb(sdb_path);
       // Since we are checking all files, null is returned for non-sdb files
       if (data === null) {
@@ -34,7 +36,7 @@ function recurse_dir(sdbs: Shimdb[], start_path: string) {
       sdbs.push(data);
     }
 
-    if (entry.isDirectory) {
+    if (entry.is_directory) {
       recurse_dir(sdbs, sdb_path);
     }
   }

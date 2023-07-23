@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/users.ts
 function get_alt_users_win(drive) {
-  const data = Deno[Deno.internal].core.ops.get_alt_users(drive);
+  const data = Deno.core.ops.get_alt_users(drive);
   const user_array = JSON.parse(data);
   return user_array;
 }
@@ -12,7 +12,7 @@ function getAltUsersWin(drive) {
 
 // main.ts
 function main() {
-  const drive = Deno.env.get("SystemDrive");
+  const drive = getEnvValue("SystemDrive");
   if (drive === void 0) {
     return [];
   }

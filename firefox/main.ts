@@ -1,36 +1,37 @@
 import { getFirefoxHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { RawFirefoxHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/firefox.ts";
+import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 /**
  * Parse Firefox history for artemis test file
  * @returns Array of FirefoxHistory entries
  */
-function main() {
+async function main() {
   const bin_path = "/Users";
 
-  return recurse_dir(bin_path);
+  return await recurse_dir(bin_path);
 }
 
 /**
  * Simple function to recursively walk the filesystem
  * @param start_path Directory to transverse
  */
-function recurse_dir(
+async function recurse_dir(
   start_path: string,
-): RawFirefoxHistory[] | null {
+): Promise<RawFirefoxHistory[] | null> {
   let results = null;
-  for (const entry of Deno.readDirSync(start_path)) {
-    const path = `${start_path}/${entry.name}`;
+  for await (const entry of await readDir(start_path)) {
+    const path = `${start_path}/${entry.filename}`;
 
     if (
-      path.includes("test_data") && entry.name == "places.sqlite" &&
-      entry.isFile
+      path.includes("test_data") && entry.filename == "places.sqlite" &&
+      entry.is_file
     ) {
       results = getFirefoxHistory(path);
       return results;
     }
 
-    if (entry.isDirectory) {
+    if (entry.is_directory) {
       try {
         results = recurse_dir(path);
         if (results != null) {

@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/systeminfo.ts
 function get_systeminfo_win() {
-  const data = Deno[Deno.internal].core.ops.get_users();
+  const data = Deno.core.ops.get_users();
   const info = JSON.parse(data);
   return info;
 }

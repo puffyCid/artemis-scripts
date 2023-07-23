@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/unix/cron.ts
 function get_cron() {
-  const data = Deno[Deno.internal].core.ops.get_cron();
+  const data = Deno.core.ops.get_cron();
   const history = JSON.parse(data);
   return history;
 }

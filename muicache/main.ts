@@ -1,4 +1,9 @@
 import { getRegistry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
+import {
+  readDir,
+  stat,
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 /**
  * MuiCache is a simple artifact that tracks applications executed from Explorer
@@ -8,19 +13,19 @@ interface MuiCache {
   description: string;
 }
 
-function main(): MuiCache[] {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === undefined) {
+async function main(): Promise<MuiCache[]> {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return [];
   }
   const mui_array: MuiCache[] = [];
   const users = `${drive}\\Users`;
-  for (const entry of Deno.readDirSync(users)) {
+  for await (const entry of readDir(users)) {
     try {
       const path =
-        `${users}\\${entry.name}\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat`;
-      const status = Deno.lstatSync(path);
-      if (!status.isFile) {
+        `${users}\\${entry.filename}\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat`;
+      const status = stat(path);
+      if (!status.is_file) {
         continue;
       }
 

@@ -5,7 +5,8 @@ import { WindowsFileInfo } from "https://raw.githubusercontent.com/puffycid/arte
  * @returns Array of file entries created in the last 14 days
  */
 function main() {
-  const args = Deno.args;
+  //@ts-ignore: Part of Artemis global context
+  const args = STATIC_ARGS;
 
   if (args.length === 0) {
     return [];

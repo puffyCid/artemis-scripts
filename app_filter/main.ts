@@ -9,7 +9,8 @@ import { MacosFileInfo } from "https://raw.githubusercontent.com/puffycid/artemi
  */
 function main() {
   // Since this is a filter script our data will be passed as a Serde Value that is a string
-  const args = Deno.args;
+  //@ts-ignore: Runtime internals
+  const args: string[] = STATIC_ARGS;
   if (args.length === 0) {
     return [];
   }

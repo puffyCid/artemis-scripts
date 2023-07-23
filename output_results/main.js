@@ -5,7 +5,7 @@ function get_win_processes(md5, sha1, sha256, pe_info) {
     sha1,
     sha256,
   };
-  const data = Deno[Deno.internal].core.ops.get_processes(
+  const data = Deno.core.ops.get_processes(
     JSON.stringify(hashes),
     pe_info,
   );
@@ -16,7 +16,7 @@ function get_win_processes(md5, sha1, sha256, pe_info) {
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/system/output.ts
 function outputResults(data, data_name, output) {
   const output_string = JSON.stringify(output);
-  const status = Deno[Deno.internal].core.ops.output_results(
+  const status = Deno.core.ops.output_results(
     data,
     data_name,
     output_string,

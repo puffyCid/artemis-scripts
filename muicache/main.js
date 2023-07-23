@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts
 function get_registry(path) {
-  const data = Deno[Deno.internal].core.ops.get_registry(path);
+  const data = Deno.core.ops.get_registry(path);
   const reg_array = JSON.parse(data);
   return reg_array;
 }
@@ -12,18 +12,18 @@ function getRegistry(path) {
 
 // main.ts
 function main() {
-  const drive = Deno.env.get("SystemDrive");
+  const drive = getEnvValue("SystemDrive");
   if (drive === void 0) {
     return [];
   }
   const mui_array = [];
   const users = `${drive}\\Users`;
-  for (const entry of Deno.readDirSync(users)) {
+  for (const entry of readDir(users)) {
     try {
       const path =
-        `${users}\\${entry.name}\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat`;
-      const status = Deno.lstatSync(path);
-      if (!status.isFile) {
+        `${users}\\${entry.filename}\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat`;
+      const status = stat(path);
+      if (!status.is_file) {
         continue;
       }
       const reg_results = getRegistry(path);

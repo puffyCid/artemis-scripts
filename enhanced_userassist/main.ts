@@ -1,9 +1,7 @@
 import { getUserAssist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { UserAssist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/userassist.ts";
-import {
-  crypto,
-  toHashString,
-} from "https://deno.land/std@0.173.0/crypto/mod.ts";
+import { stat } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
+import { hash } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/files.ts";
 
 interface EnhancedUserAssist extends UserAssist {
   md5: string;
@@ -21,9 +19,7 @@ function main(): EnhancedUserAssist[] {
   const enhanced_assist: EnhancedUserAssist[] = [];
   for (const entry of assist) {
     try {
-      const info = Deno.statSync(entry.path);
-      const data = Deno.readFileSync(entry.path);
-      const hash = crypto.subtle.digestSync("MD5", data);
+      const info = stat(entry.path);
 
       const enhance: EnhancedUserAssist = {
         path: entry.path,
@@ -32,7 +28,7 @@ function main(): EnhancedUserAssist[] {
         rot_path: entry.rot_path,
         reg_path: entry.reg_path,
         last_execution: entry.last_execution,
-        md5: toHashString(hash),
+        md5: hash(entry.path, true, false, false).md5,
         size: info.size,
       };
 

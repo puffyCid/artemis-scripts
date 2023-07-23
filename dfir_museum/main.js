@@ -1,27 +1,27 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts
 function get_eventlogs(path) {
-  const data = Deno[Deno.internal].core.ops.get_eventlogs(path);
+  const data = Deno.core.ops.get_eventlogs(path);
   const log_array = JSON.parse(data);
   return log_array;
 }
 
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/prefetch.ts
 function get_prefetch_path(path) {
-  const data = Deno[Deno.internal].core.ops.get_prefetch_path(path);
+  const data = Deno.core.ops.get_prefetch_path(path);
   const pf = JSON.parse(data);
   return pf;
 }
 
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts
 function get_registry(path) {
-  const data = Deno[Deno.internal].core.ops.get_registry(path);
+  const data = Deno.core.ops.get_registry(path);
   const reg_array = JSON.parse(data);
   return reg_array;
 }
 
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shortcuts.ts
 function get_lnk_file(path) {
-  const data = Deno[Deno.internal].core.ops.get_lnk_file(path);
+  const data = Deno.core.ops.get_lnk_file(path);
   const lnk = JSON.parse(data);
   return lnk;
 }
@@ -29,52 +29,52 @@ function get_lnk_file(path) {
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/srum.ts
 function get_srum_application_info(path) {
   const name = "{D10CA2FE-6FCF-4F6D-848E-B2E99266FA89}";
-  const data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  const data = Deno.core.ops.get_srum(path, name);
   const srum = JSON.parse(data);
   return srum;
 }
 function get_srum_application_timeline(path) {
   const name = "{5C8CF1C7-7257-4F13-B223-970EF5939312}";
-  const data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  const data = Deno.core.ops.get_srum(path, name);
   const srum = JSON.parse(data);
   return srum;
 }
 function get_srum_application_vfu(path) {
   const name = "{7ACBBAA3-D029-4BE4-9A7A-0885927F1D8F}";
-  const data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  const data = Deno.core.ops.get_srum(path, name);
   const srum = JSON.parse(data);
   return srum;
 }
 function get_srum_energy_info(path) {
   const name = "{DA73FB89-2BEA-4DDC-86B8-6E048C6DA477}";
-  const data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  const data = Deno.core.ops.get_srum(path, name);
   const srum = JSON.parse(data);
   return srum;
 }
 function get_srum_energy_usage(path) {
   let name = "{FEE4E14F-02A9-4550-B5CE-5FA2DA202E37}";
-  let data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  let data = Deno.core.ops.get_srum(path, name);
   const srum = JSON.parse(data);
   name = "{FEE4E14F-02A9-4550-B5CE-5FA2DA202E37}LT";
-  data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  data = Deno.core.ops.get_srum(path, name);
   const srum_all = srum.concat(JSON.parse(data));
   return srum_all;
 }
 function get_srum_network_info(path) {
   const name = "{973F5D5C-1D90-4944-BE8E-24B94231A174}";
-  const data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  const data = Deno.core.ops.get_srum(path, name);
   const srum = JSON.parse(data);
   return srum;
 }
 function get_srum_network_connectivity(path) {
   const name = "{DD6636C4-8929-4683-974E-22C046A43763}";
-  const data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  const data = Deno.core.ops.get_srum(path, name);
   const srum = JSON.parse(data);
   return srum;
 }
 function get_srum_notifications(path) {
   const name = "{D10CA2FE-6FCF-4F6D-848E-B2E99266FA86}";
-  const data = Deno[Deno.internal].core.ops.get_srum(path, name);
+  const data = Deno.core.ops.get_srum(path, name);
   const srum = JSON.parse(data);
   return srum;
 }
@@ -118,7 +118,7 @@ function getSrumNotifications(path) {
 }
 
 // main.ts
-var start_path = "C:\\DFIRArtifactMuseum";
+const start_path = "C:\\DFIRArtifactMuseum";
 function main() {
   const amcaches = bulkAmcacheTests();
   const shortcuts = bulkShortcuts();
@@ -164,8 +164,8 @@ function bulkShortcuts() {
     `${start_path}\\Windows\\LNK\\Win2012R2\\EricZimmerman`,
   ];
   for (const entry of paths) {
-    for (const file of Deno.readDirSync(entry)) {
-      const lnk_file = `${entry}\\${file.name}`;
+    for (const file of readDir(entry)) {
+      const lnk_file = `${entry}\\${file.filename}`;
       console.log(`Parsing Shortcut ${lnk_file}`);
       const result = getLnkFile(lnk_file);
       shortcuts.push(result);
@@ -205,11 +205,11 @@ function bulkEventlogs() {
     `${start_path}\\Windows\\EventLogs\\Win11\\RathbunVM`,
   ];
   for (const entry of paths) {
-    for (const file of Deno.readDirSync(entry)) {
+    for (const file of readDir(entry)) {
       if (!file.name.includes("evtx")) {
         continue;
       }
-      const log_file = `${entry}\\${file.name}`;
+      const log_file = `${entry}\\${file.filename}`;
       console.log(`Parsing EventLogs directory ${log_file}`);
       const result = getEventLogs(log_file);
       logs.push(result);
@@ -297,8 +297,8 @@ function bulkRegistry() {
     `${start_path}\\Windows\\Registry\\Win7\\EricZimmerman`,
   ];
   for (const entry of zim_paths) {
-    for (const file of Deno.readDirSync(entry)) {
-      const reg_file = `${entry}\\${file.name}`;
+    for (const file of readDir(entry)) {
+      const reg_file = `${entry}\\${file.filename}`;
       console.log(`Parsing Zimmerman Reg file ${reg_file}`);
       try {
         const result = getRegistry(reg_file);

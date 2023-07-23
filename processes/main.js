@@ -8,7 +8,7 @@ function get_win_processes(md5, sha1, sha256, pe_info) {
         sha1,
         sha256
     };
-    const data = Deno[Deno.internal].core.ops.get_processes(JSON.stringify(hashes), pe_info);
+    const data = Deno.core.ops.get_processes(JSON.stringify(hashes), pe_info);
     const proc_array = JSON.parse(data);
     return proc_array;
 }

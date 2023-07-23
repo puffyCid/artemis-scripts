@@ -1,6 +1,6 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts
 function get_registry(path) {
-  const data = Deno[Deno.internal].core.ops.get_registry(path);
+  const data = Deno.core.ops.get_registry(path);
   const reg_array = JSON.parse(data);
   return reg_array;
 }
@@ -10,19 +10,37 @@ function getRegistry(path) {
   return get_registry(path);
 }
 
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/env.ts
+function getEnvValue(key) {
+  const data = env.environmentValue(key);
+  return data;
+}
+
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/directory.ts
+function readDir(path) {
+  const data = fs.readDir(path);
+  return data;
+}
+
+// https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/files.ts
+function stat(path) {
+  const data = fs.stat(path);
+  return data;
+}
+
 // main.ts
-function main() {
-  const drive = Deno.env.get("SystemDrive");
-  if (drive === void 0) {
+async function main() {
+  const drive = getEnvValue("SystemDrive");
+  if (drive === "") {
     return [];
   }
   const office_array = [];
   const users = `${drive}\\Users`;
-  for (const entry of Deno.readDirSync(users)) {
+  for await (const entry of readDir(users)) {
     try {
-      const path = `${users}\\${entry.name}\\NTUSER.DAT`;
-      const status = Deno.lstatSync(path);
-      if (!status.isFile) {
+      const path = `${users}\\${entry.filename}\\NTUSER.DAT`;
+      const status = stat(path);
+      if (!status.is_file) {
         continue;
       }
       const reg_results = getRegistry(path);

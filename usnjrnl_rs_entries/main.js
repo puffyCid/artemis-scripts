@@ -3,7 +3,7 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_usnjrnl() {
-    const data = Deno[Deno.internal].core.ops.get_usnjrnl();
+    const data = Deno.core.ops.get_usnjrnl();
     const jrnl_array = JSON.parse(data);
     return jrnl_array;
 }

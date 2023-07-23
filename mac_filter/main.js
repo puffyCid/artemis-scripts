@@ -1,13 +1,13 @@
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/loginitems.ts
 function get_loginitems() {
-  const data = Deno[Deno.internal].core.ops.get_loginitems();
+  const data = Deno.core.ops.get_loginitems();
   const items = JSON.parse(data);
   return items;
 }
 
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/macho.ts
 function get_macho(path) {
-  const data = Deno[Deno.internal].core.ops.get_macho(path);
+  const data = Deno.core.ops.get_macho(path);
   if (data === "") {
     return null;
   }
@@ -17,7 +17,7 @@ function get_macho(path) {
 
 // https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/plist.ts
 function get_plist(path) {
-  const data = Deno[Deno.internal].core.ops.get_plist(path);
+  const data = Deno.core.ops.get_plist(path);
   if (data === "") {
     return null;
   }
@@ -102,7 +102,7 @@ function filterApps(data) {
   return apps;
 }
 function main() {
-  const args = Deno.args;
+  const args = STATIC_ARGS;
   if (args.length < 2) {
     return grabLoginItems();
   }

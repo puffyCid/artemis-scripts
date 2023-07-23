@@ -1,20 +1,21 @@
-import { getFsEvents } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getFsevents } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 import { Fsevents } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/fsevents.ts";
 
 /**
  * Parse FsEvents requries root permissions
  * @returns Array of FsEvent records that include "rs"
  */
-function main() {
+async function main() {
   const fs_data: Fsevents[] = [];
   const fsevents_path = "/System/Volumes/Data/.fseventsd";
 
-  for (const entry of Deno.readDirSync(fsevents_path)) {
-    if (!entry.isFile) {
+  for await (const entry of readDir(fsevents_path)) {
+    if (!entry.is_file) {
       continue;
     }
-    const fsevents_file = `${fsevents_path}/${entry.name}`;
-    const info = getFsEvents(fsevents_file);
+    const fsevents_file = `${fsevents_path}/${entry.filename}`;
+    const info = getFsevents(fsevents_file);
     if (info === null) {
       continue;
     }

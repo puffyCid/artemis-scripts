@@ -3,7 +3,7 @@
 // This code was bundled using `deno bundle` and it's not recommended to edit it manually
 
 function get_loginitems() {
-    const data = Deno[Deno.internal].core.ops.get_loginitems();
+    const data = Deno.core.ops.get_loginitems();
     const items = JSON.parse(data);
     return items;
 }
