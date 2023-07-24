@@ -6,9 +6,9 @@ import {
   getSrumApplicationInfo,
   getSrumApplicationTimeline,
   getSrumApplicationVfu,
-  getSrumNetworkConnectivity,
   getSrumEnergyInfo,
   getSrumEnergyUsage,
+  getSrumNetworkConnectivity,
   getSrumNetworkInfo,
   getSrumNotifications,
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";

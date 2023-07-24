@@ -4,6 +4,8 @@ import {
   stat,
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
+import { extractUtf8String } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/mod.ts";
+
 interface MarkOfWebFiles {
   /**Full path to file */
   path: string;
@@ -48,21 +50,14 @@ async function main() {
             continue;
           }
           const info = stat(full_path);
-          // Skip files if we cant get timestamps
-          if (
-            info.modified === null ||
-            info.created === null ||
-            info.accessed === null
-          ) {
-            continue;
-          }
+
           // Mark of the web data is actually just a bunch of strings
-          const mark_info = new TextDecoder().decode(data);
+          const mark_info = extractUtf8String(data);
           const web_file: MarkOfWebFiles = {
             mark: mark_info,
             path: full_path,
             created: info.created,
-            modified: info.mode,
+            modified: info.modified,
             accessed: info.accessed,
             size: info.size,
           };
