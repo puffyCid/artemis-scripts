@@ -53,7 +53,7 @@ async function recurse_dir(
     }
     plist_files = [];
   }
-  for await (const entry of readDir(start_path)) {
+  for (const entry of await readDir(start_path)) {
     const plist_path = `${start_path}/${entry.filename}`;
 
     // Only parsing files that have plist extension

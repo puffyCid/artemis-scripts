@@ -29,7 +29,7 @@ async function main(): Promise<OfficeMRU[]> {
   const users = `${drive}\\Users`;
 
   // Get all users and try to parse their NTUSER.DAT file
-  for await (const entry of readDir(users)) {
+  for (const entry of await readDir(users)) {
     try {
       const path = `${users}\\${entry.filename}\\NTUSER.DAT`;
       const status = stat(path);

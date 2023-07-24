@@ -132,8 +132,8 @@ class Homebrew {
 
 async function start_drinking(path: string): Promise<Array<HomebrewFormula>> {
   const casks: Array<HomebrewFormula> = [];
-  const entries = readDir(path);
-  for await (const entry of entries) {
+  const entries = await readDir(path);
+  for (const entry of entries) {
     if (!entry.is_directory) {
       continue;
     }
@@ -141,16 +141,16 @@ async function start_drinking(path: string): Promise<Array<HomebrewFormula>> {
     const caskName = `${path}/${entry.filename}/.metadata`;
     const caskData = new Homebrew();
 
-    const entries = readDir(caskName);
-    for await (const versionEntry of entries) {
+    const entries = await readDir(caskName);
+    for (const versionEntry of entries) {
       if (!versionEntry.is_directory) {
         continue;
       }
       const caskName =
         `${path}/${entry.filename}/.metadata/${versionEntry.filename}`;
 
-      const entries = readDir(caskName);
-      for await (const timeVersion of entries) {
+      const entries = await readDir(caskName);
+      for (const timeVersion of entries) {
         if (!versionEntry.is_directory) {
           continue;
         }
@@ -208,15 +208,15 @@ async function listCasks(): Promise<Array<HomebrewFormula>> {
 async function start_brewing(path: string): Promise<HomebrewReceipt[]> {
   const brew_receipts: Array<HomebrewReceipt> = [];
 
-  const entries = readDir(path);
-  for await (const entry of entries) {
+  const entries = await readDir(path);
+  for (const entry of entries) {
     if (!entry.is_directory) {
       continue;
     }
     const brew_name = `${path}/${entry.filename}`;
     const brewData = new Homebrew();
-    const entries = readDir(brew_name);
-    for await (const brew_entry of entries) {
+    const entries = await readDir(brew_name);
+    for (const brew_entry of entries) {
       if (!brew_entry.is_directory) {
         continue;
       }

@@ -15,7 +15,7 @@ async function main() {
   const bin_path = "/bin";
 
   const machos: FileMeta[] = [];
-  for await (const entry of readDir(bin_path)) {
+  for (const entry of await readDir(bin_path)) {
     if (!entry.is_file) {
       continue;
     }

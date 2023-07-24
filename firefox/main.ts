@@ -20,7 +20,7 @@ async function recurse_dir(
   start_path: string,
 ): Promise<RawFirefoxHistory[] | null> {
   let results = null;
-  for await (const entry of await readDir(start_path)) {
+  for (const entry of await readDir(start_path)) {
     const path = `${start_path}/${entry.filename}`;
 
     if (

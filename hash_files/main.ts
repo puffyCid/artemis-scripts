@@ -6,8 +6,8 @@ import {
 async function main() {
   const start = "/";
 
-  const files = readDir(start);
-  for await (const entry of files) {
+  const files = await readDir(start);
+  for (const entry of files) {
     if (!entry.is_file) {
       continue;
     }

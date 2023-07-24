@@ -8,7 +8,7 @@ import { Shimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/m
  * Custom sdb files are typically at `C:\\Windows\\apppatch\\Custom\\Custom{64}` but they can actually be anywhere
  * @returns Array of custom shimdb data
  */
-function main(): Shimdb[] {
+async function main(): Promise<Shimdb[]> {
   const drive = getEnvValue("SystemDrive");
   if (drive === "") {
     return [];
@@ -16,13 +16,13 @@ function main(): Shimdb[] {
 
   const users = `${drive}\\Users`;
   const custom_sdb: Shimdb[] = [];
-  recurse_dir(custom_sdb, users);
+  await recurse_dir(custom_sdb, users);
 
   return custom_sdb;
 }
 
 async function recurse_dir(sdbs: Shimdb[], start_path: string) {
-  for await (const entry of readDir(start_path)) {
+  for (const entry of await readDir(start_path)) {
     const sdb_path = `${start_path}\\${entry.filename}`;
     // A custom SDB file can exist anywhere and can have any extension
     // We read all files (smaller than 10MB) and check for a the sdb file signature
@@ -37,7 +37,7 @@ async function recurse_dir(sdbs: Shimdb[], start_path: string) {
     }
 
     if (entry.is_directory) {
-      recurse_dir(sdbs, sdb_path);
+      await recurse_dir(sdbs, sdb_path);
     }
   }
 }

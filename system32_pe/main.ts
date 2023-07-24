@@ -20,7 +20,7 @@ async function main(): Promise<FileMeta[]> {
   const path = `${drive}\\Windows\\System32`;
 
   const pes: FileMeta[] = [];
-  for await (const entry of readDir(path)) {
+  for (const entry of await readDir(path)) {
     if (!entry.is_file) {
       continue;
     }

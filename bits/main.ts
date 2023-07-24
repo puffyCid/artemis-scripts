@@ -4,6 +4,7 @@ import { Bits } from "https://raw.githubusercontent.com/puffycid/artemis-api/mas
 function main(): Bits {
   const carve = true;
   const entries = getBits(carve);
+
   return entries;
 }
 

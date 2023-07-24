@@ -1,12 +1,12 @@
 import {
-  getEventLogs,
+  getEventlogs,
   getLnkFile,
   getPrefetchPath,
   getRegistry,
   getSrumApplicationInfo,
   getSrumApplicationTimeline,
-  getSrumApplicationVFU,
-  getSrumConnectivity,
+  getSrumApplicationVfu,
+  getSrumNetworkConnectivity,
   getSrumEnergyInfo,
   getSrumEnergyUsage,
   getSrumNetworkInfo,
@@ -108,7 +108,7 @@ async function bulkShortcuts(): Promise<Shortcut[]> {
   ];
 
   for (const entry of paths) {
-    for await (const file of readDir(entry)) {
+    for (const file of await readDir(entry)) {
       const lnk_file = `${entry}\\${file.filename}`;
       console.log(`Parsing Shortcut ${lnk_file}`);
       const result = getLnkFile(lnk_file);
@@ -164,13 +164,13 @@ async function bulkEventlogs(): Promise<EventLogRecord[][]> {
   ];
 
   for (const entry of paths) {
-    for await (const file of readDir(entry)) {
+    for (const file of await readDir(entry)) {
       if (!file.filename.includes("evtx")) {
         continue;
       }
       const log_file = `${entry}\\${file.filename}`;
       console.log(`Parsing EventLogs directory ${log_file}`);
-      const result = getEventLogs(log_file);
+      const result = getEventlogs(log_file);
       logs.push(result);
     }
   }
@@ -222,12 +222,12 @@ function bulkSRUM(): SRUMTables {
   for (const entry of paths) {
     console.log(`Parsing SRUM ${entry}`);
     srums.appinfo.push(getSrumApplicationInfo(entry));
-    srums.connect.push(getSrumConnectivity(entry));
+    srums.connect.push(getSrumNetworkConnectivity(entry));
     srums.energy.push(getSrumEnergyUsage(entry));
     srums.energyinfo.push(getSrumEnergyInfo(entry));
     srums.notifs.push(getSrumNotifications(entry));
     srums.netinfo.push(getSrumNetworkInfo(entry));
-    srums.vfu.push(getSrumApplicationVFU(entry));
+    srums.vfu.push(getSrumApplicationVfu(entry));
     srums.timeline.push(getSrumApplicationTimeline(entry));
   }
 
@@ -312,7 +312,7 @@ async function bulkRegistry(): Promise<Registry[][]> {
   ];
 
   for (const entry of zim_paths) {
-    for await (const file of readDir(entry)) {
+    for (const file of await readDir(entry)) {
       const reg_file = `${entry}\\${file.filename}`;
       console.log(`Parsing Zimmerman Reg file ${reg_file}`);
       try {

@@ -11,11 +11,11 @@ async function main() {
 
   const users = `${drive}\\Users`;
   const recent_files: Shortcut[] = [];
-  for await (const entry of readDir(users)) {
+  for (const entry of await readDir(users)) {
     try {
       const path =
         `${users}\\${entry.filename}\\AppData\\Roaming\\Microsoft\\Windows\\Recent`;
-      for await (const entry of readDir(path)) {
+      for (const entry of await readDir(path)) {
         if (!entry.filename.endsWith("lnk")) {
           continue;
         }

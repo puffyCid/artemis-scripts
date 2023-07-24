@@ -10,7 +10,7 @@ async function main() {
   const fs_data: Fsevents[] = [];
   const fsevents_path = "/System/Volumes/Data/.fseventsd";
 
-  for await (const entry of readDir(fsevents_path)) {
+  for (const entry of await readDir(fsevents_path)) {
     if (!entry.is_file) {
       continue;
     }

@@ -20,7 +20,7 @@ async function main(): Promise<MuiCache[]> {
   }
   const mui_array: MuiCache[] = [];
   const users = `${drive}\\Users`;
-  for await (const entry of readDir(users)) {
+  for (const entry of await readDir(users)) {
     try {
       const path =
         `${users}\\${entry.filename}\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat`;

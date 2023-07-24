@@ -30,10 +30,10 @@ async function main() {
   }
   const web_files = [];
   const users = `${drive}\\Users`;
-  for await (const entry of readDir(users)) {
+  for (const entry of await readDir(users)) {
     try {
       const path = `${users}\\${entry.filename}\\Downloads`;
-      for await (const file_entry of readDir(path)) {
+      for (const file_entry of await readDir(path)) {
         try {
           if (!file_entry.is_file) {
             continue;

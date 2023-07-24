@@ -18,12 +18,12 @@ async function main() {
     collection_id: 1,
     output: OutputType.LOCAL,
   };
-  for await (const entry of readDir(journals)) {
+  for (const entry of await readDir(journals)) {
     if (!entry.is_directory) {
       continue;
     }
     const full_path = `${journals}/${entry.filename}`;
-    for await (const files of readDir(full_path)) {
+    for (const files of await readDir(full_path)) {
       if (!files.filename.endsWith("journal")) {
         continue;
       }
