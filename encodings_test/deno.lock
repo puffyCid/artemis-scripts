@@ -1,0 +1,8 @@
+{
+  "version": "2",
+  "remote": {
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/base64.ts": "cc0974b0f3ab2e294eb225f0c34d5b3553b734936bc89a5d61e209220528d658",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/mod.ts": "11036401c77e54d73ede2068058f1717c411dda68b1ad171c9ccf3c728c27b53",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/strings.ts": "c6aaff93d1be48b7d66e2a6c586925c86d501a15a0a73a0f53a3099719e8431d"
+  }
+}
