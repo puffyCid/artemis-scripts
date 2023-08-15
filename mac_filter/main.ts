@@ -1,5 +1,5 @@
 import {
-  getLoginItems,
+  getLoginitems,
   getMacho,
   getPlist,
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
@@ -19,7 +19,7 @@ interface LogiItemsMacho {
  * @returns Array of `LoginItems` with parsed `macho` data
  */
 function grabLoginItems(): LogiItemsMacho[] {
-  const data = getLoginItems();
+  const data = getLoginitems();
   const itemsMacho: LogiItemsMacho[] = [];
 
   for (const entry of data) {
@@ -52,13 +52,13 @@ function filterLogs(data: string): UnifiedLog[] {
 
   for (let entry = 0; entry < logData.length; entry++) {
     if (
-      !logData[entry].message.includes("sudo") &&
-      !logData[entry].message.includes("osascript")
+      !logData[ entry ].message.includes("sudo") &&
+      !logData[ entry ].message.includes("osascript")
     ) {
       continue;
     }
 
-    logs.push(logData[entry]);
+    logs.push(logData[ entry ]);
   }
 
   return logs;
@@ -101,16 +101,16 @@ function filterApps(data: string): AppsInfo[] {
 
   for (let entry = 0; entry < filesData.length; entry++) {
     if (
-      filesData[entry].full_path.includes(".app") &&
-      filesData[entry].filename != "Info.plist"
+      filesData[ entry ].full_path.includes(".app") &&
+      filesData[ entry ].filename != "Info.plist"
     ) {
       continue;
     }
 
     const app: AppsInfo = {
-      app_path: filesData[entry].directory,
-      info_plist: filesData[entry].full_path,
-      plist: getPlist(filesData[entry].full_path),
+      app_path: filesData[ entry ].directory,
+      info_plist: filesData[ entry ].full_path,
+      plist: getPlist(filesData[ entry ].full_path),
     };
 
     apps.push(app);
@@ -137,20 +137,20 @@ function main() {
   // If unifiedlogs, fsevents, or files we will filter the data
   // Otherwise we return the data back unfiltered
 
-  if (args[1] === "unifiedlogs") {
-    return filterLogs(args[0]);
+  if (args[ 1 ] === "unifiedlogs") {
+    return filterLogs(args[ 0 ]);
   }
 
-  if (args[1] === "fseventsd") {
-    return filterEvents(args[0]);
+  if (args[ 1 ] === "fseventsd") {
+    return filterEvents(args[ 0 ]);
   }
 
-  if (args[1] === "files") {
-    return filterApps(args[0]);
+  if (args[ 1 ] === "files") {
+    return filterApps(args[ 0 ]);
   }
 
   // We received unknown type of data, returning back unfiltered
-  return JSON.parse(args[0]);
+  return JSON.parse(args[ 0 ]);
 }
 
 main();

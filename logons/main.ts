@@ -1,4 +1,4 @@
-import { getEventLogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEventlogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
 
 interface Logon {
@@ -20,7 +20,7 @@ interface Logon {
  */
 function main() {
   const path = "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx";
-  const records = getEventLogs(path);
+  const records = getEventlogs(path);
 
   const logons: Logon[] = [];
   const time_now = new Date();
@@ -34,8 +34,8 @@ function main() {
   for (const record of records) {
     // Currently only getting logons. May add logoffs later
     if (
-      record.data["Event"]["System"]["EventID"] != 4624 &&
-      record.data["Event"]["System"]["EventID"]["#text"] != 4624
+      record.data[ "Event" ][ "System" ][ "EventID" ] != 4624 &&
+      record.data[ "Event" ][ "System" ][ "EventID" ][ "#text" ] != 4624
     ) {
       continue;
     }
@@ -47,13 +47,13 @@ function main() {
 
     const entry: Logon = {
       timestamp: record.timestamp,
-      target_sid: record.data["Event"]["EventData"]["TargetUserSid"],
-      target_username: record.data["Event"]["EventData"]["TargetUserName"],
-      target_domain: record.data["Event"]["EventData"]["TargetDomainName"],
-      type: record.data["Event"]["EventData"]["LogonType"],
-      hostname: record.data["Event"]["EventData"]["WorkstationName"],
-      ip_address: record.data["Event"]["EventData"]["IpAddress"],
-      process_name: record.data["Event"]["EventData"]["ProcessName"],
+      target_sid: record.data[ "Event" ][ "EventData" ][ "TargetUserSid" ],
+      target_username: record.data[ "Event" ][ "EventData" ][ "TargetUserName" ],
+      target_domain: record.data[ "Event" ][ "EventData" ][ "TargetDomainName" ],
+      type: record.data[ "Event" ][ "EventData" ][ "LogonType" ],
+      hostname: record.data[ "Event" ][ "EventData" ][ "WorkstationName" ],
+      ip_address: record.data[ "Event" ][ "EventData" ][ "IpAddress" ],
+      process_name: record.data[ "Event" ][ "EventData" ][ "ProcessName" ],
       raw: record,
     };
 
