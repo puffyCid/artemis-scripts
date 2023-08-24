@@ -33,15 +33,15 @@ function main() {
   const blocks: Blocks[] = [];
   const power: PowerShell[] = [];
   // There are probably more EIDs we could grab
-  const eids = [ 400, 800, 4104, 4103 ];
+  const eids = [400, 800, 4104, 4103];
 
   for (const path of paths) {
     const records = getEventlogs(path);
 
     for (const record of records) {
       if (
-        !eids.includes(record.data[ "Event" ][ "System" ][ "EventID" ]) &&
-        !eids.includes(record.data[ "Event" ][ "System" ][ "EventID" ][ "#text" ])
+        !eids.includes(record.data["Event"]["System"]["EventID"]) &&
+        !eids.includes(record.data["Event"]["System"]["EventID"]["#text"])
       ) {
         continue;
       }
@@ -49,16 +49,16 @@ function main() {
       if (path.includes("Windows PowerShell.evtx")) {
         const powershell: PowerShell = {
           timestamp: record.timestamp,
-          data: record.data[ "Event" ][ "EventData" ][ "Data" ][ "#text" ],
+          data: record.data["Event"]["EventData"]["Data"]["#text"],
           raw: record,
         };
         power.push(powershell);
       } else {
         const block: Blocks = {
           timestamp: record.timestamp,
-          path: record.data[ "Event" ][ "EventData" ][ "Path" ],
-          text: record.data[ "Event" ][ "EventData" ][ "ScriptBlockText" ],
-          id: record.data[ "Event" ][ "EventData" ][ "ScriptBlockId" ],
+          path: record.data["Event"]["EventData"]["Path"],
+          text: record.data["Event"]["EventData"]["ScriptBlockText"],
+          id: record.data["Event"]["EventData"]["ScriptBlockId"],
           raw: record,
         };
         blocks.push(block);
