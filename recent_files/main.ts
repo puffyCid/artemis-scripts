@@ -1,7 +1,7 @@
 import { getLnkFile } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
 import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
-import { Shortcut } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shortcuts.ts";
+import { Shortcut } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/shortcuts.d.ts";
 
 async function main() {
   const drive = getEnvValue("SystemDrive");
