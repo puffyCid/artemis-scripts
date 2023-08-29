@@ -1,4 +1,4 @@
-import { getEventLogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEventlogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
 import { Bits } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/bits.ts";
 import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
@@ -17,7 +17,7 @@ function grabEventLogs(): EventLogRecord[] {
     return [];
   }
 
-  const data = getEventLogs(
+  const data = getEventlogs(
     `${drive}\\Windows\\System32\\winevt\\Logs\\System.evtx`,
   );
   const service_installs: EventLogRecord[] = [];

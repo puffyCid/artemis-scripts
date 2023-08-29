@@ -1,5 +1,5 @@
 import {
-  getLoginItems,
+  getLoginitems,
   getMacho,
   getPlist,
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
@@ -19,7 +19,7 @@ interface LogiItemsMacho {
  * @returns Array of `LoginItems` with parsed `macho` data
  */
 function grabLoginItems(): LogiItemsMacho[] {
-  const data = getLoginItems();
+  const data = getLoginitems();
   const itemsMacho: LogiItemsMacho[] = [];
 
   for (const entry of data) {

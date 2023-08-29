@@ -1,4 +1,4 @@
-import { getEventLogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEventlogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
 
 interface Logon {
@@ -20,7 +20,7 @@ interface Logon {
  */
 function main() {
   const path = "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx";
-  const records = getEventLogs(path);
+  const records = getEventlogs(path);
 
   const logons: Logon[] = [];
   const time_now = new Date();

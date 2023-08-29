@@ -1,4 +1,4 @@
-import { getEventLogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { getEventlogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
 
 interface PowerShellLogs {
@@ -36,7 +36,7 @@ function main() {
   const eids = [400, 800, 4104, 4103];
 
   for (const path of paths) {
-    const records = getEventLogs(path);
+    const records = getEventlogs(path);
 
     for (const record of records) {
       if (
