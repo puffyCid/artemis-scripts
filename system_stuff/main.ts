@@ -1,6 +1,7 @@
 import {
   cpus,
   disks,
+  hostname,
   kernelVersion,
   memory,
   osVersion,
@@ -16,9 +17,10 @@ function main() {
   const disk = disks();
   const mem = memory();
   const cpu = cpus();
+  const host = hostname();
 
   console.log(
-    `Uptime: ${time} - Kernel: ${kernel} - OS: ${os} - Platform: ${info}`,
+    `Uptime: ${time} - Kernel: ${kernel} - OS: ${os} - Platform: ${info} - Hostname: ${host}`,
   );
   console.log(
     `Disks Space: ${
