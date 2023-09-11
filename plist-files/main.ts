@@ -8,7 +8,7 @@ import {
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/system/output.ts";
 
 interface PlistData {
-  plist_content: Record<string, unknown>;
+  plist_content: Record<string, unknown> | number[];
   file: string;
 }
 
@@ -58,17 +58,20 @@ async function recurse_dir(
 
     // Only parsing files that have plist extension
     if (entry.is_file && entry.filename.endsWith("plist")) {
-      const data = getPlist(plist_path);
-      if (data === null) {
+      try {
+        const data = getPlist(plist_path);
+        if (data instanceof Error) {
+          continue;
+        }
+        // Take the parsed content and associate content with file and append to array
+        const plist_info: PlistData = {
+          plist_content: data,
+          file: plist_path,
+        };
+        plist_files.push(plist_info);
+      } catch (_err) {
         continue;
       }
-
-      // Take the parsed content and associate content with file and append to array
-      const plist_info: PlistData = {
-        plist_content: data,
-        file: plist_path,
-      };
-      plist_files.push(plist_info);
       continue;
     }
 
