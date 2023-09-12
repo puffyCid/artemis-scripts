@@ -7,6 +7,9 @@ async function main() {
   const start = "/";
 
   const files = await readDir(start);
+  if (files instanceof Error) {
+    return;
+  }
   for (const entry of files) {
     if (!entry.is_file) {
       continue;

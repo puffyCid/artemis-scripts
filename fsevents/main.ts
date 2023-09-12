@@ -9,8 +9,11 @@ import { Fsevents } from "https://raw.githubusercontent.com/puffycid/artemis-api
 async function main() {
   const fs_data: Fsevents[] = [];
   const fsevents_path = "/System/Volumes/Data/.fseventsd";
-
-  for (const entry of await readDir(fsevents_path)) {
+  const result = await readDir(fsevents_path);
+  if (result instanceof Error) {
+    return;
+  }
+  for (const entry of result) {
     if (!entry.is_file) {
       continue;
     }

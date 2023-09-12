@@ -16,7 +16,11 @@ async function recurse_dir(
   start_path: string,
 ): Promise<RawSafariHistory[] | null> {
   let results = null;
-  for (const entry of await readDir(start_path)) {
+  const result = await readDir(start_path);
+  if (result instanceof Error) {
+    return [];
+  }
+  for (const entry of result) {
     const path = `${start_path}/${entry.filename}`;
 
     if (

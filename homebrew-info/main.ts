@@ -130,9 +130,12 @@ class Homebrew {
   }
 }
 
-async function start_drinking(path: string): Promise<Array<HomebrewFormula>> {
+async function start_drinking(path: string): Promise<HomebrewFormula[]> {
   const casks: Array<HomebrewFormula> = [];
   const entries = await readDir(path);
+  if (entries instanceof Error) {
+    return [];
+  }
   for (const entry of entries) {
     if (!entry.is_directory) {
       continue;
@@ -142,6 +145,9 @@ async function start_drinking(path: string): Promise<Array<HomebrewFormula>> {
     const caskData = new Homebrew();
 
     const entries = await readDir(caskName);
+    if (entries instanceof Error) {
+      return [];
+    }
     for (const versionEntry of entries) {
       if (!versionEntry.is_directory) {
         continue;
@@ -150,6 +156,9 @@ async function start_drinking(path: string): Promise<Array<HomebrewFormula>> {
         `${path}/${entry.filename}/.metadata/${versionEntry.filename}`;
 
       const entries = await readDir(caskName);
+      if (entries instanceof Error) {
+        return [];
+      }
       for (const timeVersion of entries) {
         if (!versionEntry.is_directory) {
           continue;
@@ -209,6 +218,9 @@ async function start_brewing(path: string): Promise<HomebrewReceipt[]> {
   const brew_receipts: Array<HomebrewReceipt> = [];
 
   const entries = await readDir(path);
+  if (entries instanceof Error) {
+    return [];
+  }
   for (const entry of entries) {
     if (!entry.is_directory) {
       continue;
@@ -216,6 +228,9 @@ async function start_brewing(path: string): Promise<HomebrewReceipt[]> {
     const brew_name = `${path}/${entry.filename}`;
     const brewData = new Homebrew();
     const entries = await readDir(brew_name);
+    if (entries instanceof Error) {
+      return [];
+    }
     for (const brew_entry of entries) {
       if (!brew_entry.is_directory) {
         continue;

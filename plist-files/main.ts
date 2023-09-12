@@ -1,5 +1,5 @@
 import { getPlist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
+import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/directory.ts";
 import {
   Format,
   Output,
@@ -53,7 +53,11 @@ async function recurse_dir(
     }
     plist_files = [];
   }
-  for (const entry of await readDir(start_path)) {
+  const result = await readDir(start_path);
+  if (result instanceof Error) {
+    return;
+  }
+  for (const entry of result) {
     const plist_path = `${start_path}/${entry.filename}`;
 
     // Only parsing files that have plist extension

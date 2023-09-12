@@ -9,7 +9,11 @@ async function main() {
   // Path Persist log (trace files)
   const path = "/var/db/diagnostics/Persist";
   const xprotect_entries: UnifiedLog[] = [];
-  for (const entry of await readDir(path)) {
+  const result = await readDir(path);
+  if (result instanceof Error) {
+    return;
+  }
+  for (const entry of result) {
     if (!entry.is_file) {
       continue;
     }

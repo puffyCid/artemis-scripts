@@ -22,7 +22,11 @@ async function main(): Promise<Shimdb[]> {
 }
 
 async function recurse_dir(sdbs: Shimdb[], start_path: string) {
-  for (const entry of await readDir(start_path)) {
+  const result = await readDir(start_path);
+  if (result instanceof Error) {
+    return;
+  }
+  for (const entry of result) {
     const sdb_path = `${start_path}\\${entry.filename}`;
     // A custom SDB file can exist anywhere and can have any extension
     // We read all files (smaller than 10MB) and check for a the sdb file signature

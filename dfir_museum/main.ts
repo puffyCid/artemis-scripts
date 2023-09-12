@@ -16,7 +16,7 @@ import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/
 import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
 import { Prefetch } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/prefetch.ts";
 import { Registry } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/registry.ts";
-import { Shortcut } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shortcuts.ts";
+import { Shortcut } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/shortcuts.d.ts";
 import {
   ApplicationInfo,
   ApplicationTimeline,
@@ -108,7 +108,11 @@ async function bulkShortcuts(): Promise<Shortcut[]> {
   ];
 
   for (const entry of paths) {
-    for (const file of await readDir(entry)) {
+    const result = await readDir(entry);
+    if (result instanceof Error) {
+      return [];
+    }
+    for (const file of result) {
       const lnk_file = `${entry}\\${file.filename}`;
       console.log(`Parsing Shortcut ${lnk_file}`);
       const result = getLnkFile(lnk_file);
@@ -164,7 +168,11 @@ async function bulkEventlogs(): Promise<EventLogRecord[][]> {
   ];
 
   for (const entry of paths) {
-    for (const file of await readDir(entry)) {
+    const result = await readDir(entry);
+    if (result instanceof Error) {
+      return [];
+    }
+    for (const file of result) {
       if (!file.filename.includes("evtx")) {
         continue;
       }
@@ -312,7 +320,11 @@ async function bulkRegistry(): Promise<Registry[][]> {
   ];
 
   for (const entry of zim_paths) {
-    for (const file of await readDir(entry)) {
+    const result = await readDir(entry);
+    if (result instanceof Error) {
+      return [];
+    }
+    for (const file of result) {
       const reg_file = `${entry}\\${file.filename}`;
       console.log(`Parsing Zimmerman Reg file ${reg_file}`);
       try {
