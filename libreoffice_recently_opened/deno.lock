@@ -23,9 +23,6 @@
     "https://deno.land/x/esbuild_deno_loader@0.6.0/src/portable_loader.ts": "35b6c526eed8c2c781a3256b23c30aa7cce69c0ef1d583c15528663287ba18a3",
     "https://deno.land/x/esbuild_deno_loader@0.6.0/src/shared.ts": "b64749cd8c0f6252a11498bd8758ef1220003e46b2c9b68e16da63fd7e92b13a",
     "https://deno.land/x/importmap@0.2.1/_util.ts": "ada9a9618b537e6c0316c048a898352396c882b9f2de38aba18fd3f2950ede89",
-    "https://deno.land/x/importmap@0.2.1/mod.ts": "ae3d1cd7eabd18c01a4960d57db471126b020f23b37ef14e1359bbb949227ade",
-    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/directory.ts": "261a30ef376a4a40fc2c08bd9d795065db6078be20ee8c302ea2183a918e32f9",
-    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/files.ts": "c8ec80fc9308a5c51a5b605d60f3fcbb8b0f6a8c74d89929f77235ee9158d3a6",
-    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/jumplists.ts": "e5fe6ca5d7fd245c8d3e54377d0a4c47728f356e45e66ccd137aa7ccf9c5c27c"
+    "https://deno.land/x/importmap@0.2.1/mod.ts": "ae3d1cd7eabd18c01a4960d57db471126b020f23b37ef14e1359bbb949227ade"
   }
 }
