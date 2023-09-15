@@ -44,9 +44,6 @@ interface DFIRTests {
  * https://raw.githubusercontent.com/AndrewRathbun/DFIRArtifactMuseum
  *
  * The purpose of this script is to ensure `artemis` does not crash and to test against a wide variety of different Windows OS aritfacts
- *
- * Known minor issues:
- * See `bulkRegistry()`
  */
 async function main() {
   const amcaches = bulkAmcacheTests();
@@ -67,7 +64,7 @@ async function main() {
 }
 
 /**
- * Normally we would `getAmcache()` to `Amcache` data, but it does not accept custom paths because `Amcache` is located at static location.
+ * Normally we would use `getAmcache()` to `Amcache` data, but it does not accept custom paths because `Amcache` is located at static location.
  * Using `getRegistry()` is ok because `Amcache` is *mostly* just strings once the binary Registry format is parsed out
  * Regardless, we should **NOT** get any errors or warnings when parsing the `Amcache` Registry data below
  * @returns Array of Registry data related to Amcache
@@ -249,14 +246,6 @@ function bulkSRUM(): SRUMTables {
  * The Zimmerman Registry files/minefield `artemis` gracefully returns errors it gets back to the caller. Known errors:
  *  - Correctly fails to parse non-Registry files (ex: `NotAHive` ). These errors are expected and are **OK**
  *  - Correctly fails to parse one (1) unallocated FILETIME/QWORD data value associated with file `SAM_DUPENAME`. `Artemis` only supports allocated data right now, so this error **ok**
- *    - The error above then triggers an error related to iterating through the values of an empty RegResourceList at `SAM\SAM\Domains\Builtin\Aliases\Members\S-1-5-21-4271176276-4210259494-4108073714` associated with file `SAM_DUPENAME`.
- *    - Reviewing the Key manually shows the the data is empty. The Registry is suppose to label the data `RegNone`, instead its labeled `RegResourceList`.
- *    - Since the data is labeled `RegResourceList` `artemis` attempts to parse it. **BUT** before parsing the data `artemis` checks to make sure the data is allocated. Since the data is **unallocated** it generates the first error above and does not parse it.
- *    - These errors also show up when parsing Win2012R2 `SAM` file at key `CsiTool-CreateHive-{00000000-0000-0000-0000-000000000000}\SAM\Domains\Builtin\Aliases`
- *    - Ultimately these errors are expected and are **ok**
- *
- * `Artemis` also logs seven (7) warnings about not being able to extract UTF16 strings. Sometimes Registry keys can contain gibberish string data
- * All of these warnings came from `NTUSER slack.DAT`, `artemis` does **not** support parsing any Registry slack data
  *
  * @returns An array of all parsed Registry files with all of their entries
  */
@@ -336,6 +325,9 @@ async function bulkRegistry(): Promise<Registry[][]> {
     }
   }
 
+  console.log(
+    "Done parsing!. Outputing all data into one JSON file. Should be ~1GB",
+  );
   return regs;
 }
 
