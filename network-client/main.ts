@@ -1,6 +1,9 @@
-import { Protocol, request } from "../../artemis-api/src/http/client.ts";
-import { encodeBytes } from "../../artemis-api/src/encoding/bytes.ts";
-import { extractUtf8String } from "../../artemis-api/src/encoding/strings.ts";
+import { encodeBytes } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/bytes.ts";
+import { extractUtf8String } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/strings.ts";
+import {
+  Protocol,
+  request,
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/http/client.ts";
 
 async function main() {
   const url = "https://httpbin.org/user-agent";
