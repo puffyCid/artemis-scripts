@@ -5,7 +5,7 @@ import {
 import {
   Groups,
   Users,
-} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/accounts.ts";
+} from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/macos/accounts.d.ts";
 
 interface Accounts {
   users: Users[];

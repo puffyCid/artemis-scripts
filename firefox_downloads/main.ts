@@ -1,5 +1,4 @@
 import { getFirefoxDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { RawFirefoxDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/firefox.ts";
 import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 async function main() {

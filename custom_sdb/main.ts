@@ -1,7 +1,8 @@
 import { getCustomShimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
 import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
-import { Shimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shimdb.ts";
+import { WindowsError } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/errors.ts";
+import { Shimdb } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/shimdb.d.ts";
 
 /**
  * Search for custom sdb files in all User directories.
@@ -32,8 +33,8 @@ async function recurse_dir(sdbs: Shimdb[], start_path: string) {
     // We read all files (smaller than 10MB) and check for a the sdb file signature
     if (entry.is_file) {
       const data = getCustomShimdb(sdb_path);
-      // Since we are checking all files, null is returned for non-sdb files
-      if (data === null) {
+      // Since we are checking all files, error is returned for non-sdb files
+      if (data instanceof WindowsError) {
         continue;
       }
 

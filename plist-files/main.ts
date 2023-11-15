@@ -8,7 +8,7 @@ import {
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/system/output.ts";
 
 interface PlistData {
-  plist_content: Record<string, unknown> | number[];
+  plist_content: Record<string, unknown> | Uint8Array;
   file: string;
 }
 

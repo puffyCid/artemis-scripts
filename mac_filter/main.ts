@@ -3,15 +3,16 @@ import {
   getMacho,
   getPlist,
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { MacosError } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/errors.ts";
 import { MacosFileInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/files.ts";
-import { Fsevents } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/fsevents.ts";
-import { LoginItems } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/loginitems.ts";
-import { MachoInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/macho.ts";
-import { UnifiedLog } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/unifiedlogs.ts";
+import { Fsevents } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/macos/fsevents.d.ts";
+import { LoginItems } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/macos/loginitems.d.ts";
+import { MachoInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/macos/macho.d.ts";
+import { UnifiedLog } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/macos/unifiedlogs.d.ts";
 
 interface LogiItemsMacho {
   items: LoginItems;
-  macho: MachoInfo[] | null;
+  macho: MachoInfo[] | MacosError;
 }
 
 /**
@@ -32,7 +33,7 @@ function grabLoginItems(): LogiItemsMacho[] {
     } catch (_e) {
       const item: LogiItemsMacho = {
         items: entry,
-        macho: null,
+        macho: [],
       };
       itemsMacho.push(item);
     }
@@ -87,7 +88,7 @@ function filterEvents(data: string): Fsevents[] {
 interface AppsInfo {
   app_path: string;
   info_plist: string;
-  plist: Record<string, unknown> | null;
+  plist: MacosError | Record<string, unknown> | Uint8Array;
 }
 
 /**

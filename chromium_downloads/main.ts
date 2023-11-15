@@ -1,5 +1,4 @@
 import { getChromiumDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { RawChromiumDownloads } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/chromium.ts";
 import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 async function main() {

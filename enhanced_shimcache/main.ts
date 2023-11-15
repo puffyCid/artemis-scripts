@@ -1,7 +1,8 @@
 import { getShimcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { Shimcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/shimcache.ts";
 import { stat } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 import { hash } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/files.ts";
+import { Shimcache } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/shimcache.d.ts";
+import { FileError } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/errors.ts";
 interface EnhancedShimcache extends Shimcache {
   md5: string;
   created: number;
@@ -32,15 +33,21 @@ function main() {
   for (const entry of shimcache_entries) {
     try {
       const info = stat(entry.path);
+      if (info instanceof FileError) {
+        const shim = create_entry(entry);
+        shim_array.push(shim);
+        continue;
+      }
 
-      if (info.modified === null || info.created === null) {
+      const hashData = hash(entry.path, true, false, false);
+      if (hashData instanceof FileError) {
         const shim = create_entry(entry);
         shim_array.push(shim);
         continue;
       }
 
       const shim: EnhancedShimcache = {
-        md5: hash(entry.path, true, false, false).md5,
+        md5: hashData.md5,
         created: info.created,
         modified: info.modified,
         accessed: info.accessed,

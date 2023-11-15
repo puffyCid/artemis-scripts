@@ -1,7 +1,9 @@
 import { getPe } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { getEnvValue } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/mod.ts";
+import { FileError } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/errors.ts";
 import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
-import { PeInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/pe.ts";
+import { WindowsError } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/errors.ts";
+import { PeInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/pe.d.ts";
 
 interface FileMeta {
   path: string;
@@ -21,7 +23,7 @@ async function main(): Promise<FileMeta[]> {
 
   const pes: FileMeta[] = [];
   const result = await readDir(path);
-  if (result instanceof Error) {
+  if (result instanceof FileError) {
     return [];
   }
   for (const entry of result) {
@@ -31,7 +33,7 @@ async function main(): Promise<FileMeta[]> {
 
     const pe_path = `${path}\\${entry.filename}`;
     const info = getPe(pe_path);
-    if (info === null) {
+    if (info instanceof WindowsError) {
       continue;
     }
     const meta: FileMeta = {

@@ -1,6 +1,7 @@
 import { getElf } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
-import { ElfInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/linux/elf.ts";
+import { LinuxError } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/linux/errors.ts";
+import { ElfInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/linux/elf.d.ts";
 
 interface FileMeta {
   path: string;
@@ -20,7 +21,7 @@ async function main() {
     }
     const elf_path = `${bin_path}/${entry.filename}`;
     const info = getElf(elf_path);
-    if (info === null) {
+    if (info instanceof LinuxError) {
       continue;
     }
     const meta: FileMeta = {

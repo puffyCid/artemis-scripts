@@ -1,8 +1,8 @@
 import { getEventlogs } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/eventlogs.ts";
+import { EventLogRecord } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/eventlogs.d.ts";
 
 interface Logon {
-  timestamp: number;
+  timestamp: bigint;
   target_sid: string;
   target_username: string;
   target_domain: string;

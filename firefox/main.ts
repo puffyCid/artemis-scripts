@@ -1,5 +1,4 @@
 import { getFirefoxHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { RawFirefoxHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/firefox.ts";
 import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 /**
