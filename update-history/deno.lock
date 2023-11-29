@@ -23,6 +23,23 @@
     "https://deno.land/x/esbuild_deno_loader@0.6.0/src/portable_loader.ts": "35b6c526eed8c2c781a3256b23c30aa7cce69c0ef1d583c15528663287ba18a3",
     "https://deno.land/x/esbuild_deno_loader@0.6.0/src/shared.ts": "b64749cd8c0f6252a11498bd8758ef1220003e46b2c9b68e16da63fd7e92b13a",
     "https://deno.land/x/importmap@0.2.1/_util.ts": "ada9a9618b537e6c0316c048a898352396c882b9f2de38aba18fd3f2950ede89",
-    "https://deno.land/x/importmap@0.2.1/mod.ts": "ae3d1cd7eabd18c01a4960d57db471126b020f23b37ef14e1359bbb949227ade"
+    "https://deno.land/x/importmap@0.2.1/mod.ts": "ae3d1cd7eabd18c01a4960d57db471126b020f23b37ef14e1359bbb949227ade",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/base64.ts": "3c6f52d64501a838cf7f190ff9b1f677d531de659edfe2b42daf7b839c30b01e",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/bytes.ts": "d6e4910fc8bc1182439d9d7d8ff00cca7a25c755aa6624f19938bfa2c435380b",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/errors.ts": "e6afea3630f8b2007839e76bfedc86d3282b3af51184b086540375ac3917fed5",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/mod.ts": "fb52c7c349c51f2a74e10ae649d5732998a77b6aa680cb613cdf3d4f7e65cfd0",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/strings.ts": "26440126fa3b17c3a18d534b2070934930c2c65c3fcfd9848720e24ce8d11d19",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/uuid.ts": "553976b6bbe17f21578302f0b10a1b982e1e99d8f1f9ce946d250aef802f76ea",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/xml.ts": "436ef4b79227bb3f756d03a7e5fdbee7a4fa327f63eb200c3a4e70c3e3172cc4",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/environment/env.ts": "e7f24800111f4922e3f8a53e28b38d4ad7271276364c79afd35bc7ab9f8bac07",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/nom/helpers.ts": "10e290a7bf15d3755a4ae991c881bc6ef2302f18df2ab47bd19e47f51110003b",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/nom/mod.ts": "606fbcb25b007aa5b3f29d8eab6fb07c0ff70214fbee71e6a1bb671b2ceab4a8",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/nom/parsers.ts": "e18b4b65fed1ac55e58b7a0e94ac4a37ddd6bf2def33a5a04113448f4ee759be",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/utils/error.ts": "571580bd23877e84f6a0fa3e279a3c506f938ca978c1eb7c50e6019bf2887840",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/errors.ts": "47d1ecb86e2dadfb2521d73fb794d27a61ac8586c66be8b9c4cb7aed0b1b9c70",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/ese.ts": "d86ef7dfbaf01433c315b8deff18e894c47e4c16b9623e7477fb80c15e3becd7",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/ese/updates.ts": "38be2143913dd462da582a9921dda68dae68f358de76d22637d21a2aa0a8e388",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/ese.ts": "d25bf7d535fbc386829a301cb7eb64fed5b80f43bcd6795cb7d5ba41ad699770",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/ese/updates.ts": "0aa2c2e466f66079ee285d3e9f96c649f2adab2b19de44f12c1b535150388dc5"
   }
 }
