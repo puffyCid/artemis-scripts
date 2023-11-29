@@ -5,7 +5,7 @@ async function main() {
   const _result = await esbuild.build({
     plugins: [denoPlugin()],
     entryPoints: ["./main.ts"],
-    outfile: "main.js",
+    outfile: "browser_addons.js",
     bundle: true,
     format: "cjs",
   });

@@ -5,7 +5,7 @@ async function main() {
   const _result = await esbuild.build({
     plugins: [denoPlugin()],
     entryPoints: ["./main.ts"],
-    outfile: "main.js",
+    outfile: "system32_pe.js",
     bundle: true,
     format: "cjs",
   });

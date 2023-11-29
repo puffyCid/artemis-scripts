@@ -5,7 +5,7 @@ async function main() {
   const _result = await esbuild.build({
     plugins: [denoPlugin()],
     entryPoints: ["./main.ts"],
-    outfile: "main.js",
+    outfile: "libreoffice_recently_opened.js",
     bundle: true,
     format: "cjs",
   });

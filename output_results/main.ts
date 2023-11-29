@@ -1,7 +1,7 @@
 import {
-  getWinProcesses,
   outputResults,
 } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
+import { processListing } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/system/memory.ts";
 import {
   Format,
   Output,
@@ -14,7 +14,7 @@ function main() {
   const sha256 = false;
   const pe_info = true;
 
-  const proc_list = getWinProcesses(md5, sha1, sha256, pe_info);
+  const proc_list = processListing(md5, sha1, sha256, pe_info);
   for (const entry of proc_list) {
     if (entry.name.includes("artemis")) {
       const out: Output = {

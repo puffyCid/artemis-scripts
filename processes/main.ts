@@ -1,13 +1,12 @@
 import { processListing } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/system/memory.ts";
-import { WindowsProcessInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/processes.ts";
 
-function main(): WindowsProcessInfo[] {
+function main() {
   const md5 = true;
   const sha1 = false;
   const sha256 = false;
-  const pe_info = true;
+  const binary_info = true;
 
-  const proc_list = processListing(md5, sha1, sha256, pe_info);
+  const proc_list = processListing(md5, sha1, sha256, binary_info);
   return proc_list;
 }
 

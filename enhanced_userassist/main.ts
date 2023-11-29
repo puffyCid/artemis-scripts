@@ -1,7 +1,7 @@
-import { getUserAssist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { UserAssist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/userassist.ts";
+import { getUserassist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
 import { stat } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 import { hash } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/files.ts";
+import { UserAssist } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/types/windows/userassist.d.ts";
 
 interface EnhancedUserAssist extends UserAssist {
   md5: string;
@@ -14,7 +14,7 @@ interface EnhancedUserAssist extends UserAssist {
  * @returns Array of UserAssist with MD5 hash and binary size if available
  */
 function main(): EnhancedUserAssist[] {
-  const assist = getUserAssist();
+  const assist = getUserassist(false);
 
   const enhanced_assist: EnhancedUserAssist[] = [];
   for (const entry of assist) {
