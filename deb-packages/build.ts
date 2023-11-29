@@ -3,9 +3,9 @@ import { denoPlugin } from "https://deno.land/x/esbuild_deno_loader@0.6.0/mod.ts
 
 async function main() {
   const _result = await esbuild.build({
-    plugins: [denoPlugin()],
-    entryPoints: ["./main.ts"],
-    outfile: "main.js",
+    plugins: [ denoPlugin() ],
+    entryPoints: [ "./main.ts" ],
+    outfile: "deb-packages.js",
     bundle: true,
     format: "cjs",
   });
