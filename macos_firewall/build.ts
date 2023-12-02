@@ -8,7 +8,6 @@ async function main() {
     outfile: "macos_firewall.js",
     bundle: true,
     format: "cjs",
-    minify: true,
   });
 
   esbuild.stop();
