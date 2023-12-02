@@ -6,22 +6,21 @@ A collection of useful scripts for
 The online documentation at https://puffycid.github.io/artemis-api provides in
 depth information on how to create and execute scripts.
 
-## Quick Guide
+All bundled JS scripts can be downloaded from
+[releases](https://github.com/puffyCid/artemis-scripts/releases/tag/nightly)
 
-1. Download [artemis](https://github.com/puffycid/artemis)
-2. Download [deno](https://deno.com/)
-3. Clone this repo
-4. Compile the script your script!
+These scripts can be executed by artemis via `artemis -j <script>.js`
 
-An example with the `processes` script:
+## Manual Bundling Guide
 
-```
-deno run -A build.ts
-```
+If you want to bundle these scripts yourself you will need Deno
 
-5. Base64 encode the JavaScript output file and embed in TOML collection.
-6. (Optional) You can also execute compiled JavaScript directly with `artemis`
-   via `artemis -j <path to js file>`
+1. Download [deno](https://deno.com/)
+2. Clone this repo
+3. Navigate to script you want to complile and execute `deno run -A build.ts`!
+4. Base64 encode the JavaScript output file and embed in TOML collection **OR**
+   you can also execute JavaScript directly with `artemis` via
+   `artemis -j <path to js file>`
 
 ## Questions or Issues
 
