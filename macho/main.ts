@@ -36,6 +36,7 @@ async function main() {
     };
     machos.push(meta);
   }
+  console.log(machos);
   return machos;
 }
 
