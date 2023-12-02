@@ -2,7 +2,7 @@ import { wifiNetworks } from "https://raw.githubusercontent.com/puffycid/artemis
 
 function main() {
   const data = wifiNetworks();
-  console.log(data[ 0 ].name);
+  console.log(data[0].name);
 }
 
 main();

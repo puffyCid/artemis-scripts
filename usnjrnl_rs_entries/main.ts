@@ -10,8 +10,8 @@ function main() {
   // For really really large arrays for..of is actually pretty slow
   // USNJrnl can contain 100k to 400k entries
   for (let entry = 0; entry < jrnl_entries.length; entry++) {
-    if (jrnl_entries[ entry ].extension === "rs") {
-      rs_entries.push(jrnl_entries[ entry ]);
+    if (jrnl_entries[entry].extension === "rs") {
+      rs_entries.push(jrnl_entries[entry]);
     }
   }
 

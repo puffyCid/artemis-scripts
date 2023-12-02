@@ -25,7 +25,7 @@ function main() {
     `I nommed: '${result.nommed}'. I have remaining: '${result.remaining}'`,
   );
 
-  const bytes = new Uint8Array([ 0, 0, 0, 0, 1 ]);
+  const bytes = new Uint8Array([0, 0, 0, 0, 1]);
 
   const rsultBytes = takeWhile(bytes, 0);
   if (rsultBytes instanceof Error) {
@@ -53,8 +53,8 @@ function main() {
     console.log(result.nommed);
   }
 
-  const bytes2 = new Uint8Array([ 1, 0, 0, 13, 223 ]);
-  const stop = new Uint8Array([ 223 ]);
+  const bytes2 = new Uint8Array([1, 0, 0, 13, 223]);
+  const stop = new Uint8Array([223]);
   const resultBytes = takeUntil(bytes2, stop);
   if (resultBytes instanceof Error) {
     console.error(`Failed to nom bytes until: ${resultBytes.message}`);

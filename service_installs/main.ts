@@ -8,8 +8,8 @@ function main() {
   const service_installs: EventLogRecord[] = [];
   for (const record of records) {
     if (
-      record.data[ "Event" ][ "System" ][ "EventID" ] != 7045 &&
-      record.data[ "Event" ][ "System" ][ "EventID" ][ "#text" ] != 7045
+      record.data["Event"]["System"]["EventID"] != 7045 &&
+      record.data["Event"]["System"]["EventID"]["#text"] != 7045
     ) {
       continue;
     }

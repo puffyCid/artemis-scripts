@@ -1,4 +1,4 @@
-import { firewallStatus } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/firewall.ts";
+import { firewallStatus } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/macos/plist/firewall.ts";
 
 function main() {
   const results = firewallStatus();

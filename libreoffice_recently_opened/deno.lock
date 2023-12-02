@@ -1,5 +1,5 @@
 {
-  "version": "2",
+  "version": "3",
   "remote": {
     "https://deno.land/std@0.156.0/_util/assert.ts": "e94f2eb37cebd7f199952e242c77654e43333c1ac4c5c700e929ea3aa5489f74",
     "https://deno.land/std@0.156.0/_util/os.ts": "3b4c6e27febd119d36a416d7a97bd3b0251b77c88942c8f16ee5953ea13e2e49",
@@ -23,6 +23,14 @@
     "https://deno.land/x/esbuild_deno_loader@0.6.0/src/portable_loader.ts": "35b6c526eed8c2c781a3256b23c30aa7cce69c0ef1d583c15528663287ba18a3",
     "https://deno.land/x/esbuild_deno_loader@0.6.0/src/shared.ts": "b64749cd8c0f6252a11498bd8758ef1220003e46b2c9b68e16da63fd7e92b13a",
     "https://deno.land/x/importmap@0.2.1/_util.ts": "ada9a9618b537e6c0316c048a898352396c882b9f2de38aba18fd3f2950ede89",
-    "https://deno.land/x/importmap@0.2.1/mod.ts": "ae3d1cd7eabd18c01a4960d57db471126b020f23b37ef14e1359bbb949227ade"
+    "https://deno.land/x/importmap@0.2.1/mod.ts": "ae3d1cd7eabd18c01a4960d57db471126b020f23b37ef14e1359bbb949227ade",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/errors.ts": "cad32ae1c819a14247cb41e4b3696a5a460552db622cb85ac7dcd8b68d759686",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/applications/libreoffice.ts": "e3688e91f50a04ee84154b648265206c57ebbd8848a5d837272cd25d5469f29b",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/errors.ts": "e6afea3630f8b2007839e76bfedc86d3282b3af51184b086540375ac3917fed5",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/encoding/xml.ts": "436ef4b79227bb3f756d03a7e5fdbee7a4fa327f63eb200c3a4e70c3e3172cc4",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/errors.ts": "40478f6715c500d9ca00a17262c67fee11284cc146fa45b65e6a5971ea43e8d1",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/files.ts": "1d17c3796aad228c4eb5e150b15fa4637dda3057508cc1731eba383b6cc4f2cf",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/system/systeminfo.ts": "2f5b1114b33e98a3ff922f1aecd5e940a4c7e1288d4646feff195d512adcdc9e",
+    "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/utils/error.ts": "571580bd23877e84f6a0fa3e279a3c506f938ca978c1eb7c50e6019bf2887840"
   }
 }

@@ -7,7 +7,7 @@ function main() {
 
   const processes: EventLogRecord[] = [];
   for (const record of records) {
-    if (record.data[ "Event" ][ "System" ][ "EventID" ] != 4688) {
+    if (record.data["Event"]["System"]["EventID"] != 4688) {
       continue;
     }
     processes.push(record);

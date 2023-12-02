@@ -3,8 +3,8 @@ import { denoPlugin } from "https://deno.land/x/esbuild_deno_loader@0.6.0/mod.ts
 
 async function main() {
   const _result = await esbuild.build({
-    plugins: [ denoPlugin() ],
-    entryPoints: [ "./main.ts" ],
+    plugins: [denoPlugin()],
+    entryPoints: ["./main.ts"],
     outfile: "chocolatey.js",
     bundle: true,
     format: "cjs",
