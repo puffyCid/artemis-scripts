@@ -2,7 +2,7 @@ import { getAltUsersWin } from "https://raw.githubusercontent.com/puffycid/artem
 import { UserInfo } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/windows/users.ts";
 
 function main(): UserInfo[] {
-  const users = getAltUsersWin("C");
+  const users = getAltUsersWin("C:\\Windows\\System32\\config\\SAM");
   return users;
 }
 

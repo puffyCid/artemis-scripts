@@ -1,51 +1,21 @@
 import { getFirefoxHistory } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/mod.ts";
-import { readDir } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
+import { glob } from "https://raw.githubusercontent.com/puffycid/artemis-api/master/src/filesystem/mod.ts";
 
 /**
  * Parse Firefox history for artemis test file
  * @returns Array of FirefoxHistory entries
  */
-async function main() {
-  const bin_path = "/Users";
-
-  return await recurse_dir(bin_path);
-}
-
-/**
- * Simple function to recursively walk the filesystem
- * @param start_path Directory to transverse
- */
-async function recurse_dir(
-  start_path: string,
-): Promise<RawFirefoxHistory[] | null> {
-  let results = null;
-  const result = await readDir(start_path);
-  if (result instanceof Error) {
-    return [];
+function main() {
+  const paths = glob(
+    "/Users/*/Library/Application Support/Firefox/Profiles/*.default-release/places.sqlite",
+  );
+  if (paths instanceof Error) {
+    return;
   }
-  for (const entry of result) {
-    const path = `${start_path}/${entry.filename}`;
 
-    if (
-      path.includes("test_data") && entry.filename == "places.sqlite" &&
-      entry.is_file
-    ) {
-      results = getFirefoxHistory(path);
-      return results;
-    }
-
-    if (entry.is_directory) {
-      try {
-        results = recurse_dir(path);
-        if (results != null) {
-          return results;
-        }
-      } catch (_e) {
-        continue;
-      }
-    }
+  for (const path of paths) {
+    return getFirefoxHistory(path.full_path);
   }
-  return results;
 }
 
 main();
